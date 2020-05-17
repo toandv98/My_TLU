@@ -25,6 +25,19 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    viewBinding {
+        enabled = true
+    }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -67,6 +80,13 @@ dependencies {
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$corountines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$corountines_version"
+
+    // Joda-time
+    implementation 'joda-time:joda-time:2.10.5'
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 
