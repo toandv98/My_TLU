@@ -75,4 +75,9 @@ dependencies {
     implementation 'joda-time:joda-time:2.10.6'
     implementation 'commons-codec:commons-codec:20041127.091804'
     implementation 'org.jsoup:jsoup:1.13.1'
+
+    implementation 'eu.davidea:flexible-adapter:5.1.0'
+    implementation 'eu.davidea:flexible-adapter-ui:1.0.0'
+    implementation 'eu.davidea:flexible-adapter-livedata:1.0.0-b3'
+    implementation 'eu.davidea:flexible-adapter-databinding:1.0.0'
 }
