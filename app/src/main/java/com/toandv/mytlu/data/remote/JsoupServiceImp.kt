@@ -24,53 +24,60 @@ import com.toandv.mytlu.utils.Constants.URL_MARK
 import com.toandv.mytlu.utils.Constants.URL_PRACTISE
 import com.toandv.mytlu.utils.Constants.URL_TIMETABLE
 import com.toandv.mytlu.utils.Constants.URL_TUITION
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import org.jsoup.Connection
 import org.jsoup.HttpStatusException
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import java.io.IOException
 import java.util.*
 
-class JsoupServiceImp : JsoupService {
+class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) :
+    JsoupService {
 
     private var cookies: Map<String, String>? = null
 
-    @Throws(IOException::class)
-    fun login(username: String, password: String): Boolean {
-        val form = Jsoup.connect(URL_BASE + URL_LOGIN).timeout(TIME_OUT).get()
+    override val isLoggedIn: Boolean
+        get() = cookies != null
 
-        val data = HashMap<String, String>()
-        data[KEY_VIEW_STATE] = form.getElementById(KEY_VIEW_STATE).`val`()
-        data[KEY_VIEW_STATE_GENERATOR] = form.getElementById(KEY_VIEW_STATE_GENERATOR).`val`()
-        data[KEY_EVENT_VALIDATION] = form.getElementById(KEY_EVENT_VALIDATION).`val`()
-        data[KEY_USER_NAME] = username
-        data[KEY_PASSWORD] = password
-        data[KEY_SUBMIT] = "login"
+    override suspend fun login(username: String, password: String): Boolean =
+        withContext(Dispatchers.IO) {
+            val form = Jsoup.connect(URL_BASE + URL_LOGIN).timeout(TIME_OUT).get()
 
-        val response = Jsoup.connect(URL_BASE + URL_LOGIN)
-            .data(data).method(Connection.Method.POST).timeout(TIME_OUT).execute()
-        cookies = response.cookies()
+            val data = HashMap<String, String>()
+            data[KEY_VIEW_STATE] = form.getElementById(KEY_VIEW_STATE).`val`()
+            data[KEY_VIEW_STATE_GENERATOR] = form.getElementById(KEY_VIEW_STATE_GENERATOR).`val`()
+            data[KEY_EVENT_VALIDATION] = form.getElementById(KEY_EVENT_VALIDATION).`val`()
+            data[KEY_USER_NAME] = username
+            data[KEY_PASSWORD] = password
+            data[KEY_SUBMIT] = "login"
 
-        return response.parse().getElementById(LBL_ERROR_INFO).text().isNotEmpty()
+            val response = Jsoup.connect(URL_BASE + URL_LOGIN)
+                .data(data).method(Connection.Method.POST).timeout(TIME_OUT).execute()
+            cookies = response.cookies()
+
+            return@withContext response.parse().getElementById(LBL_ERROR_INFO).text().isNotEmpty()
+        }
+
+    override fun logout() {
+        cookies = null
     }
 
-    @get:Throws(IOException::class)
-    override val tuitionDoc: Document
-        get() = getDoc(URL_BASE + URL_TUITION)
+    override suspend fun getTuitionDoc(): Document {
+        return getDoc(URL_BASE + URL_TUITION)
+    }
 
-    @get:Throws(IOException::class)
-    override val markDoc: Document
-        get() = getDoc(URL_BASE + URL_MARK)
+    override suspend fun getMarkDoc(): Document {
+        return getDoc(URL_BASE + URL_MARK)
+    }
 
-    @get:Throws(IOException::class)
-    override val practiseDoc: Document
-        get() = getDoc(URL_BASE + URL_PRACTISE)
+    override suspend fun getPractiseDoc(): Document {
+        return getDoc(URL_BASE + URL_PRACTISE)
+    }
 
-    @Throws(IOException::class)
-    override fun getTimetableDoc(
-        semester: String,
-        term: String
-    ): Document? {
+    override suspend fun getTimetableDoc(semester: String, term: String): Document {
         var timetableDoc = getDoc(URL_BASE + URL_TIMETABLE)
 
         val data = HashMap<String, String>()
@@ -96,11 +103,10 @@ class JsoupServiceImp : JsoupService {
         return postDoc(URL_BASE + URL_TIMETABLE, data)
     }
 
-    @Throws(IOException::class)
-    override fun getExamTimetableDoc(
+    override suspend fun getExamTimetableDoc(
         semester: String,
         dot: String
-    ): Document? {
+    ): Document {
         var examDoc = getDoc(URL_BASE + URL_EXAM_TIMETABLE)
 
         val data = HashMap<String, String>()
@@ -123,24 +129,31 @@ class JsoupServiceImp : JsoupService {
         return postDoc(URL_BASE + URL_EXAM_TIMETABLE, data)
     }
 
-    @Throws(IOException::class)
-    private fun getDoc(url: String): Document {
-        return noError(Jsoup.connect(url).cookies(cookies).timeout(TIME_OUT).get())
+    private suspend fun getDoc(url: String): Document {
+        return withContext(ioDispatcher) {
+            val doc = async(Dispatchers.IO) {
+                Jsoup.connect(url).cookies(
+                    cookies ?: throw IllegalStateException("User has logged out, cookies = null")
+                ).timeout(TIME_OUT).get()
+            }
+            noError(doc.await())
+        }
     }
 
-    @Throws(IOException::class)
-    private fun postDoc(
-        url: String,
-        data: Map<String, String>
-    ): Document {
-        return noError(Jsoup.connect(url).cookies(cookies).data(data).timeout(TIME_OUT).post())
+    private suspend fun postDoc(url: String, data: Map<String, String>): Document {
+        return withContext(ioDispatcher) {
+            val doc = async(Dispatchers.IO) {
+                Jsoup.connect(url).cookies(
+                    cookies ?: throw IllegalStateException("User has logged out, cookies = null")
+                ).data(data).timeout(TIME_OUT).post()
+            }
+            return@withContext noError(doc.await())
+        }
     }
 
-    @Throws(IOException::class)
     private fun noError(doc: Document): Document {
-        if (doc.html().length < 600 && doc.html()
-                .contains(MSG_ERROR_PAGE)
-        ) throw HttpStatusException(MSG_ERROR_PAGE, 904, doc.baseUri())
+        if (doc.html().length < 600 && doc.html().contains(MSG_ERROR_PAGE))
+            throw HttpStatusException(MSG_ERROR_PAGE, 904, doc.baseUri())
         return doc
     }
 }

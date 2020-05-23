@@ -7,7 +7,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
-import com.toandv.mytlu.MyTluApplication
 import com.toandv.mytlu.utils.NetWorkState.*
 
 enum class NetWorkState(val isConnected: Boolean) {

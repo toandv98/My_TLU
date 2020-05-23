@@ -1,27 +1,22 @@
 package com.toandv.mytlu.data.remote
 
 import org.jsoup.nodes.Document
-import java.io.IOException
 
 interface JsoupService {
-    @get:Throws(IOException::class)
-    val tuitionDoc: Document?
 
-    @get:Throws(IOException::class)
-    val markDoc: Document?
+    val isLoggedIn: Boolean
 
-    @get:Throws(IOException::class)
-    val practiseDoc: Document?
+    suspend fun login(username: String, password: String): Boolean
 
-    @Throws(IOException::class)
-    fun getTimetableDoc(
-        semester: String,
-        term: String
-    ): Document?
+    fun logout()
 
-    @Throws(IOException::class)
-    fun getExamTimetableDoc(
-        semester: String,
-        dot: String
-    ): Document?
+    suspend fun getTuitionDoc(): Document
+
+    suspend fun getMarkDoc(): Document
+
+    suspend fun getPractiseDoc(): Document
+
+    suspend fun getTimetableDoc(semester: String, term: String): Document
+
+    suspend fun getExamTimetableDoc(semester: String, dot: String): Document
 }

@@ -1,10 +1,36 @@
 package com.toandv.mytlu.data
 
 import com.toandv.mytlu.data.local.AppDatabase
+import com.toandv.mytlu.data.remote.JsoupService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class AppRepositoryImpl constructor(
     private val database: AppDatabase,
+    private val jsoupService: JsoupService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-) : AppRepository
+) : AppRepository {
+
+    override suspend fun login(userName: String, password: String): Boolean {
+        if (jsoupService.isLoggedIn) jsoupService.logout()
+        return jsoupService.login(userName, password)
+    }
+
+    override suspend fun refresh() {
+        //TODO login lai o day hoac check login
+        coroutineScope {
+            launch(ioDispatcher) {
+                val doc = jsoupService.getMarkDoc()
+                //TODO implement this @Toandv
+                database.sumMarkDao().insertSumMarks()
+            }
+            launch(ioDispatcher) {
+                val doc = jsoupService.getPractiseDoc()
+                //TODO implement this @Toandv
+                database.detailMarkDao()
+            }
+        }
+    }
+}
