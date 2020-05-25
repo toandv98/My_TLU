@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My TLU</string>
+
+    <string name="label_account_number">Số tài khoản</string>
+    <string name="label_msv">Mã sinh viên</string>
+    <string name="label_name">Tên sinh viên</string>
+    <string name="label_class">Lớp:</string>
+    <string name="label_faculty">Ngành:</string>
+    <string name="label_courses">Khóa:</string>
 </resources>

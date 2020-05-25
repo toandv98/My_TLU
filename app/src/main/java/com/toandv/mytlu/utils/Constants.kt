@@ -29,4 +29,6 @@ const val URL_EXAM_TIMETABLE = "cmcsoft.iu.web.info/StudentViewExamList.aspx"
 const val PATTERN_TIME_FORMAT = "HH:mm"
 const val PATTERN_DATE_FORMAT = "EEEE, dd/MM/yyyy"
 
+const val INPUT_DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm"
+
 const val TIME_OUT = 60000

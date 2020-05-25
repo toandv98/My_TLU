@@ -18,5 +18,5 @@ interface JsoupService {
 
     suspend fun getTimetableDoc(semester: String, term: String): Document
 
-    suspend fun getExamTimetableDoc(semester: String, dot: String): Document
+    suspend fun getExamTimetableDoc(semester: String, dot: String? = null): Document
 }

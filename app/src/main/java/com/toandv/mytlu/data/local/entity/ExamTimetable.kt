@@ -10,13 +10,19 @@ import org.joda.time.LocalDateTime
 @Entity(tableName = "exam_timetables")
 data class ExamTimetable(
 
+    val code: String,
+
+    val name: String,
+
+    val st: String,
+
     @ColumnInfo(name = "datetime")
     val dateTime: LocalDateTime,
-    val code: String,
-    val name: String,
-    val st: String,
+
     val time: String,
+
     val sbd: String,
+
     val room: String
 ) {
     @PrimaryKey(autoGenerate = true)

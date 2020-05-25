@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     val jsoupServiceImp = JsoupServiceImp()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }

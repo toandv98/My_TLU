@@ -83,7 +83,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
 
     override suspend fun getExamTimetableDoc(
         semester: String,
-        dot: String
+        dot: String?
     ): Document {
         var examDoc = getDoc(URL_BASE + URL_EXAM_TIMETABLE)
 
@@ -97,7 +97,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         data[DRP_SEMESTER] = semester
 
         examDoc = postDoc(URL_BASE + URL_EXAM_TIMETABLE, data)
-        if (dot.isEmpty()) return examDoc
+        if (dot.isNullOrEmpty()) return examDoc
 
         data[KEY_VIEW_STATE] = examDoc.getElementById(KEY_VIEW_STATE).`val`()
         data[KEY_VIEW_STATE_GENERATOR] = examDoc.getElementById(KEY_VIEW_STATE_GENERATOR).`val`()
