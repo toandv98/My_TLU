@@ -1,4 +1,4 @@
-package com.toandv.mytlu.data.remote
+package com.toandv.mytlu.remote
 
 import com.toandv.mytlu.utils.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -55,7 +55,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         return getDoc(URL_BASE + URL_PRACTISE)
     }
 
-    override suspend fun getTimetableDoc(semester: String, term: String): Document {
+    override suspend fun getTimetableDoc(semester: String, term: String?): Document {
         var timetableDoc = getDoc(URL_BASE + URL_TIMETABLE)
 
         val data = HashMap<String, String>()
@@ -70,7 +70,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         data[DRP_SEMESTER] = semester
 
         timetableDoc = postDoc(URL_BASE + URL_TIMETABLE, data)
-        if (term.isEmpty()) return timetableDoc
+        if (term.isNullOrEmpty()) return timetableDoc
 
         data[KEY_VIEW_STATE] = timetableDoc.getElementById(KEY_VIEW_STATE).`val`()
         data[KEY_VIEW_STATE_GENERATOR] =

@@ -1,12 +1,10 @@
-package com.toandv.mytlu.data.remote
+package com.toandv.mytlu.remote
 
-import com.toandv.mytlu.utils.URL_BASE
-import com.toandv.mytlu.utils.URL_LOGIN
+import com.toandv.mytlu.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.*
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
@@ -97,5 +95,28 @@ class JsoupServiceImpTest {
         val idBankAccountNum = "lblSoTaiKhoanNganHang"
         val expected = "Số tài khoản ngân hàng: 100003570711"
         assertThat(doc.getElementById(idBankAccountNum).text(), `is`(expected))
+    }
+
+    @Test
+    fun notLoggedIn_notCrash() = runBlockingTest {
+        assertThat(subject.isLoggedIn, `is`(false))
+
+        val ifTuitionDoc = subject.getTuitionDoc()
+        assertThat(ifTuitionDoc.baseUri(), not(URL_BASE + URL_TUITION))
+
+        val ifMarkDoc = subject.getMarkDoc()
+        assertThat(ifMarkDoc.baseUri(), not(URL_BASE + URL_MARK))
+
+        val ifPracticeDoc = subject.getPractiseDoc()
+        assertThat(ifPracticeDoc.baseUri(), not(URL_BASE + URL_PRACTISE))
+
+        // GIVEN
+        val ky1_2019_2020 = "bf298b4722c84138b4dea0f498e8bc59"
+
+        val ifExamTimetableDoc = subject.getExamTimetableDoc(ky1_2019_2020)
+        assertThat(ifExamTimetableDoc.baseUri(), not(URL_BASE + URL_EXAM_TIMETABLE))
+
+        val ifTimetableDoc = subject.getTimetableDoc(ky1_2019_2020)
+        assertThat(ifTimetableDoc.baseUri(), not(URL_BASE + URL_TIMETABLE))
     }
 }

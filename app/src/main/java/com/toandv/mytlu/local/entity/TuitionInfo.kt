@@ -1,4 +1,4 @@
-package com.toandv.mytlu.data.local.entity
+package com.toandv.mytlu.local.entity
 
 data class TuitionInfo(
     val id: Int,

@@ -1,9 +1,9 @@
-package com.toandv.mytlu.data.remote
+package com.toandv.mytlu.remote
 
 import android.content.res.Resources
 import com.toandv.mytlu.R
-import com.toandv.mytlu.data.local.entity.ExamTimetable
-import com.toandv.mytlu.data.local.entity.Tuition
+import com.toandv.mytlu.local.entity.ExamTimetable
+import com.toandv.mytlu.local.entity.Tuition
 import com.toandv.mytlu.utils.INPUT_DATE_TIME_FORMAT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -44,7 +44,7 @@ fun Document.parseTuitionData(resources: Resources): Flow<Tuition> = flow {
         emit(
             Tuition(
                 resources.getString(R.string.label_account_number),
-                it.text().split(": ".toRegex(), -1)[1]
+                it.text().split(": ".toRegex())[1]
             )
         )
     }

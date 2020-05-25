@@ -1,12 +1,12 @@
-package com.toandv.mytlu.data.local
+package com.toandv.mytlu.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.toandv.mytlu.data.local.entity.Tuition
-import com.toandv.mytlu.data.local.entity.TuitionInfo
+import com.toandv.mytlu.local.entity.Tuition
+import com.toandv.mytlu.local.entity.TuitionInfo
 
 abstract class StudentTuitionDao {
     @Query("select id, label, amount, info from student_tuition where info < 2")

@@ -3,7 +3,7 @@ package com.toandv.mytlu.service
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.core.app.JobIntentService
-import com.toandv.mytlu.data.AppRepository
+import com.toandv.mytlu.repo.AppRepository
 import kotlinx.coroutines.*
 import javax.inject.Inject
 

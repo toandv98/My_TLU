@@ -1,4 +1,4 @@
-package com.toandv.mytlu.data.local
+package com.toandv.mytlu.local
 
 import androidx.room.TypeConverter
 import org.joda.time.LocalDateTime

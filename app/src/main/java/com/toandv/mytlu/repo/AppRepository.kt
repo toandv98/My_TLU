@@ -1,4 +1,4 @@
-package com.toandv.mytlu.data
+package com.toandv.mytlu.repo
 
 interface AppRepository {
     suspend fun login(userName: String, password: String): Boolean

@@ -1,6 +1,6 @@
-package com.toandv.mytlu.data.remote
+package com.toandv.mytlu.remote
 
-import com.toandv.mytlu.data.local.entity.ExamTimetable
+import com.toandv.mytlu.local.entity.ExamTimetable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -17,7 +17,7 @@ import java.security.MessageDigest
 
 @InternalCoroutinesApi
 @ExperimentalCoroutinesApi
-class DocumentExtensionsKtTest {
+class DocumentExtensions_JsoupServiceTest {
     private lateinit var jsoupService: JsoupService
 
     private lateinit var messageDigest: MessageDigest

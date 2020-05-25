@@ -1,8 +1,8 @@
-package com.toandv.mytlu.data.local
+package com.toandv.mytlu.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.toandv.mytlu.data.local.entity.Schedule
+import com.toandv.mytlu.local.entity.Schedule
 import kotlinx.coroutines.Deferred
 
 @Dao

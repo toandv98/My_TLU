@@ -1,14 +1,5 @@
 package com.toandv.mytlu.di
 
-import android.app.Application
-import android.content.Context
-import com.toandv.mytlu.MainActivity
-import com.toandv.mytlu.data.local.AppDatabase
-import dagger.Component
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
-
 //@Singleton
 //@Component
 //interface AppComponent {

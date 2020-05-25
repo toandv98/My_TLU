@@ -1,4 +1,4 @@
-package com.toandv.mytlu.data.remote
+package com.toandv.mytlu.remote
 
 import org.jsoup.nodes.Document
 
@@ -16,7 +16,7 @@ interface JsoupService {
 
     suspend fun getPractiseDoc(): Document
 
-    suspend fun getTimetableDoc(semester: String, term: String): Document
+    suspend fun getTimetableDoc(semester: String, term: String? = null): Document
 
     suspend fun getExamTimetableDoc(semester: String, dot: String? = null): Document
 }

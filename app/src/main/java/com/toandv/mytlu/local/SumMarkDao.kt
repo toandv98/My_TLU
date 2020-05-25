@@ -1,11 +1,11 @@
-package com.toandv.mytlu.data.local
+package com.toandv.mytlu.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.toandv.mytlu.data.local.entity.SumMark
+import com.toandv.mytlu.local.entity.SumMark
 
 abstract class SumMarkDao {
     //endregion

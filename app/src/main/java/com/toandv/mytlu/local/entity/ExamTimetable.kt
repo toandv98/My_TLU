@@ -1,10 +1,8 @@
-package com.toandv.mytlu.data.local.entity
+package com.toandv.mytlu.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.toandv.mytlu.utils.PATTERN_DATE_FORMAT
-import com.toandv.mytlu.utils.PATTERN_TIME_FORMAT
 import org.joda.time.LocalDateTime
 
 @Entity(tableName = "exam_timetables")
@@ -27,14 +25,14 @@ data class ExamTimetable(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-    override fun toString(): String {
-        return "%s\n%s\n%s\n%s\n%s\n%s".format(
-            name,
-            dateTime.toString(PATTERN_DATE_FORMAT),
-            dateTime.toString(PATTERN_TIME_FORMAT),
-            time,
-            room,
-            sbd
-        )
-    }
+//    override fun toString(): String {
+//        return "%s\n%s\n%s\n%s\n%s\n%s".format(
+//            name,
+//            dateTime.toString(PATTERN_DATE_FORMAT),
+//            dateTime.toString(PATTERN_TIME_FORMAT),
+//            time,
+//            room,
+//            sbd
+//        )
+//    }
 }

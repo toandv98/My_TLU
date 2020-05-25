@@ -1,8 +1,8 @@
-package com.toandv.mytlu.data
+package com.toandv.mytlu.repo
 
-import com.toandv.mytlu.data.local.AppDatabase
-import com.toandv.mytlu.data.local.entity.ExamTimetable
-import com.toandv.mytlu.data.remote.JsoupService
+import com.toandv.mytlu.local.AppDatabase
+import com.toandv.mytlu.local.entity.ExamTimetable
+import com.toandv.mytlu.remote.JsoupService
 import kotlinx.coroutines.*
 import org.jsoup.nodes.Document
 
