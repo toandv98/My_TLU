@@ -1,29 +1,6 @@
 package com.toandv.mytlu.data.remote
 
-import com.toandv.mytlu.utils.Constants.DRP_DOT_THI
-import com.toandv.mytlu.utils.Constants.DRP_SEMESTER
-import com.toandv.mytlu.utils.Constants.DRP_TERM
-import com.toandv.mytlu.utils.Constants.HID_ES_SHOW_ROOM_CODE
-import com.toandv.mytlu.utils.Constants.HID_LOAI_UU_TIEN_HE_SO_HOC_PHI
-import com.toandv.mytlu.utils.Constants.HID_SHOW_SHIFT_END_TIME
-import com.toandv.mytlu.utils.Constants.HID_STUDENT_ID
-import com.toandv.mytlu.utils.Constants.HID_TUITION_FACTOR_MODE
-import com.toandv.mytlu.utils.Constants.KEY_EVENT_VALIDATION
-import com.toandv.mytlu.utils.Constants.KEY_PASSWORD
-import com.toandv.mytlu.utils.Constants.KEY_SUBMIT
-import com.toandv.mytlu.utils.Constants.KEY_USER_NAME
-import com.toandv.mytlu.utils.Constants.KEY_VIEW_STATE
-import com.toandv.mytlu.utils.Constants.KEY_VIEW_STATE_GENERATOR
-import com.toandv.mytlu.utils.Constants.LBL_ERROR_INFO
-import com.toandv.mytlu.utils.Constants.MSG_ERROR_PAGE
-import com.toandv.mytlu.utils.Constants.TIME_OUT
-import com.toandv.mytlu.utils.Constants.URL_BASE
-import com.toandv.mytlu.utils.Constants.URL_EXAM_TIMETABLE
-import com.toandv.mytlu.utils.Constants.URL_LOGIN
-import com.toandv.mytlu.utils.Constants.URL_MARK
-import com.toandv.mytlu.utils.Constants.URL_PRACTISE
-import com.toandv.mytlu.utils.Constants.URL_TIMETABLE
-import com.toandv.mytlu.utils.Constants.URL_TUITION
+import com.toandv.mytlu.utils.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -34,6 +11,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import java.util.*
 
+@Suppress("BlockingMethodInNonBlockingContext")
 class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO) :
     JsoupService {
 
@@ -43,7 +21,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         get() = cookies != null
 
     override suspend fun login(username: String, password: String): Boolean =
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val form = Jsoup.connect(URL_BASE + URL_LOGIN).timeout(TIME_OUT).get()
 
             val data = HashMap<String, String>()
@@ -58,7 +36,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
                 .data(data).method(Connection.Method.POST).timeout(TIME_OUT).execute()
             cookies = response.cookies()
 
-            return@withContext response.parse().getElementById(LBL_ERROR_INFO).text().isNotEmpty()
+            return@withContext response.parse().getElementById(LBL_ERROR_INFO) == null
         }
 
     override fun logout() {
@@ -131,7 +109,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
 
     private suspend fun getDoc(url: String): Document {
         return withContext(ioDispatcher) {
-            val doc = async(Dispatchers.IO) {
+            val doc = async {
                 Jsoup.connect(url).cookies(
                     cookies ?: throw IllegalStateException("User has logged out, cookies = null")
                 ).timeout(TIME_OUT).get()
@@ -142,7 +120,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
 
     private suspend fun postDoc(url: String, data: Map<String, String>): Document {
         return withContext(ioDispatcher) {
-            val doc = async(Dispatchers.IO) {
+            val doc = async {
                 Jsoup.connect(url).cookies(
                     cookies ?: throw IllegalStateException("User has logged out, cookies = null")
                 ).data(data).timeout(TIME_OUT).post()

@@ -1,7 +1,7 @@
 package com.toandv.mytlu
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.toandv.mytlu.data.remote.JsoupServiceImp
 
 class MainActivity : AppCompatActivity() {

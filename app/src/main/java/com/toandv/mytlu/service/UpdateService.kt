@@ -8,7 +8,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @SuppressLint("Registered")
-class UpdateService :  JobIntentService(){
+class UpdateService : JobIntentService() {
     @Inject
     lateinit var appRepository: AppRepository
 
@@ -19,7 +19,8 @@ class UpdateService :  JobIntentService(){
         //TODO read https://medium.com/androiddevelopers/exceptions-in-coroutines-ce8da1ec060c
     }
 
-    private val corountineScope = CoroutineScope(Dispatchers.Main + job + exceptionHandler)
+    private val corountineScope =
+        CoroutineScope(CoroutineName("UpdateService Scope") + Dispatchers.Main + job + exceptionHandler)
 
     override fun onCreate() {
         super.onCreate()
@@ -27,6 +28,12 @@ class UpdateService :  JobIntentService(){
     }
 
     override fun onHandleWork(intent: Intent) {
-        corountineScope.launch { appRepository.refresh() }
+        corountineScope.launch {
+            try {
+                appRepository.refresh()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
