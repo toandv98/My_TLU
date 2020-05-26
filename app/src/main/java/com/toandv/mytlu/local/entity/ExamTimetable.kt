@@ -25,14 +25,4 @@ data class ExamTimetable(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-//    override fun toString(): String {
-//        return "%s\n%s\n%s\n%s\n%s\n%s".format(
-//            name,
-//            dateTime.toString(PATTERN_DATE_FORMAT),
-//            dateTime.toString(PATTERN_TIME_FORMAT),
-//            time,
-//            room,
-//            sbd
-//        )
-//    }
 }

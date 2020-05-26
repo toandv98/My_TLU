@@ -4,6 +4,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.toandv.mytlu.MyTluApplication
 import com.toandv.mytlu.local.entity.ExamTimetable
+import com.toandv.mytlu.local.entity.Schedule
 import com.toandv.mytlu.local.entity.Tuition
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -31,7 +32,7 @@ class DocumentExtensionsKtTest {
         }
 
         // THEN
-        assertThat(mlist.size, equalTo(3))
+        assertThat(mlist.size, equalTo(3)).also { println("assert passed with List<ExamTimetable>.size = ${mlist.size}") }
 
         mlist.clear()
         // GIVEN
@@ -45,7 +46,7 @@ class DocumentExtensionsKtTest {
     }
 
     @Test
-    fun parseTuitionData() = runBlockingTest {
+    fun parseTuitionData_trueDoc_falseDoc_notCrash() = runBlockingTest {
         val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
         requireNotNull(resources)
 
@@ -53,19 +54,45 @@ class DocumentExtensionsKtTest {
 
         // GIVEN
         val trueDoc = DummyDocument.getStudentTuition_aspx_html()
-        trueDoc.parseTuitionData(resources).collect {
+        trueDoc.parseTuitionDataFlow(resources).collect {
             mlist.add(it)
             println(it)
         }
 
-        assertThat(mlist.size, greaterThan(0))
+        assertThat(mlist.size, greaterThan(0)).also { println("assert passed with List<Tuition>.size = ${mlist.size}") }
 
         mlist.clear()
         // GIVEN
         val falseDoc = DummyDocument.getStudentViewExamList_aspx_html()
 
         // WHEN
-        falseDoc.parseTuitionData(resources).collect { mlist.add(it) }
+        falseDoc.parseTuitionDataFlow(resources).collect { mlist.add(it) }
+
+        // THEN
+        assertThat(mlist.size, equalTo(0))
+    }
+
+    @Test
+    fun parseScheduleDataFlow_trueDoc_falseDoc_notCrash() = runBlockingTest{
+        val mlist = mutableListOf<Schedule>()
+
+        // GIVEN
+        val trueDoc = DummyDocument.getStudentTimeTable_aspx_html()
+
+        // WHEN
+        trueDoc.parseScheduleDataFlow().collect{
+            mlist.add(it)
+        }
+
+        // THEN
+        assertThat(mlist.size, greaterThan(0)).also { println("assert passed with List<Schedule>.size = ${mlist.size}") }
+
+        mlist.clear()
+        // GIVEN
+        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+
+        // WHEN
+        falseDoc.parseScheduleDataFlow()
 
         // THEN
         assertThat(mlist.size, equalTo(0))

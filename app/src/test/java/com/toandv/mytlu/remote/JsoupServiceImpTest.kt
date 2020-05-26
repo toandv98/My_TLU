@@ -5,8 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.*
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import java.security.MessageDigest

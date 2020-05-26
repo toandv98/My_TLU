@@ -12,7 +12,7 @@ abstract class DetailMarkDao {
     @Query("select * from detail_mark")
     abstract fun getAll(): LiveData<List<DetailMark>>
 
-    @Query("select * from detail_mark where dp = 1")
+    @Query("select * from detail_mark where hocKiGanNhat = 1")
     abstract fun getDetailHKMarks(): LiveData<List<DetailMark>>
 
     @Query("delete from detail_mark")

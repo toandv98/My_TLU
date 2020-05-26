@@ -11,9 +11,9 @@ data class DetailMark(
     val quaTrinh: Float,
     val diemThi: Float,
     val tongKet: Float,
-    val diemChu: Char
+    val diemChu: Char,
+    var hocKiGanNhat: Boolean = false
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
-    var dp: Boolean = false
 }
