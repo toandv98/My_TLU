@@ -2,11 +2,9 @@ package com.toandv.mytlu.remote
 
 import android.content.res.Resources
 import com.toandv.mytlu.R
-import com.toandv.mytlu.local.entity.DetailMark
-import com.toandv.mytlu.local.entity.ExamTimetable
-import com.toandv.mytlu.local.entity.Schedule
-import com.toandv.mytlu.local.entity.Tuition
-import com.toandv.mytlu.utils.*
+import com.toandv.mytlu.local.entity.*
+import com.toandv.mytlu.utils.INPUT_DATE_FORMAT
+import com.toandv.mytlu.utils.INPUT_DATE_TIME_FORMAT
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import org.joda.time.LocalDate
@@ -42,7 +40,7 @@ fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
                 items[7].text(),
                 items[8].text()
             )
-        } ?: flow { }
+        } ?: flowOf()
 }
 
 @ExperimentalCoroutinesApi
@@ -146,7 +144,7 @@ fun Document.parseScheduleDataFlow(): Flow<Schedule> =
                 }
                 Schedule(name, code, classRoom, classTime, from, to, status)
             }.let { emitAll(it) }
-        } ?: flow { }
+        } ?: flowOf()
 
 private fun String.isMulti(): Boolean = substring(30, 33).matches("""\(\d\)""".toRegex())
 
@@ -232,4 +230,33 @@ private data class TimeTable(
     val id = 0
 }
 
-fun Document.parseStudentMarkDataFlow(): Flow<DetailMark> = TODO()
+fun Document.parseStudentMarkDataFlow(): Flow<Subject> = TODO()
+
+/**
+ * parse [SubjectWithMarks] from the [Document] of this URL:
+ * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx
+ * @return [Flow] of [SubjectWithMarks] from the document
+ */
+fun Document.parseSubjectWithMarksFlow(): Flow<SubjectWithMarks> =
+    takeIf { title() == ".: Bảng điểm :." }
+        ?.select("tblStudentMark tr")
+        ?.asFlow()
+        ?.filter { it.className() != "DataGridFixedHeader" && it.children().size > 13 }
+        ?.map<Element, SubjectWithMarks> {
+            val (c, n, tc, l) = it.children().subList(1, 4).map(Element::text)
+            val (qt, th, tk, dc) = it.children().subList(10, 13).map(Element::text)
+            require(l.toInt() > 0)
+            val marks = mutableListOf<Mark>()
+            for (i: Int in 1..l.toInt()) {
+                try {
+                    val quaTrinh = qt.substring((i - 1) * 3, i * 3).toFloat()
+                    val thi = th.substring((i - 1) * 3, i * 3).toFloat()
+                    val tongKet = tk.substring((i - 1) * 3, i * 3).toFloat()
+                    val diemChu = dc[i - 1]
+                    marks.add(Mark(c, i, quaTrinh, thi, tongKet, diemChu))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            SubjectWithMarks(Subject(c, n, tc.toInt()), marks)
+        } ?: flowOf()

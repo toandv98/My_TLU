@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.toandv.mytlu.MyTluApplication
 import com.toandv.mytlu.local.entity.ExamTimetable
 import com.toandv.mytlu.local.entity.Schedule
+import com.toandv.mytlu.local.entity.SubjectWithMarks
 import com.toandv.mytlu.local.entity.Tuition
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -32,7 +33,10 @@ class DocumentExtensionsKtTest {
         }
 
         // THEN
-        assertThat(mlist.size, equalTo(3)).also { println("assert passed with List<ExamTimetable>.size = ${mlist.size}") }
+        assertThat(
+            mlist.size,
+            equalTo(3)
+        ).also { println("assert passed with List<ExamTimetable>.size = ${mlist.size}") }
 
         mlist.clear()
         // GIVEN
@@ -59,7 +63,10 @@ class DocumentExtensionsKtTest {
             println(it)
         }
 
-        assertThat(mlist.size, greaterThan(0)).also { println("assert passed with List<Tuition>.size = ${mlist.size}") }
+        assertThat(
+            mlist.size,
+            greaterThan(0)
+        ).also { println("assert passed with List<Tuition>.size = ${mlist.size}") }
 
         mlist.clear()
         // GIVEN
@@ -73,26 +80,60 @@ class DocumentExtensionsKtTest {
     }
 
     @Test
-    fun parseScheduleDataFlow_trueDoc_falseDoc_notCrash() = runBlockingTest{
+    fun parseScheduleDataFlow_trueDoc_falseDoc_notCrash() = runBlockingTest {
         val mlist = mutableListOf<Schedule>()
 
         // GIVEN
         val trueDoc = DummyDocument.getStudentTimeTable_aspx_html()
 
         // WHEN
-        trueDoc.parseScheduleDataFlow().collect{
+        trueDoc.parseScheduleDataFlow().collect {
             mlist.add(it)
         }
 
         // THEN
-        assertThat(mlist.size, greaterThan(0)).also { println("assert passed with List<Schedule>.size = ${mlist.size}") }
+        assertThat(
+            mlist.size,
+            greaterThan(0)
+        ).also { println("assert passed with List<Schedule>.size = ${mlist.size}") }
 
         mlist.clear()
         // GIVEN
         val falseDoc = DummyDocument.getStudentTuition_aspx_html()
 
         // WHEN
-        falseDoc.parseScheduleDataFlow()
+        falseDoc.parseScheduleDataFlow().collect {
+            mlist.add(it)
+        }
+
+        // THEN
+        assertThat(mlist.size, equalTo(0))
+    }
+
+    @Test
+    fun parseListDetailMarkFlow() = runBlockingTest {
+        val mlist = mutableListOf<SubjectWithMarks>()
+
+        // GIVEN
+        val trueDoc = DummyDocument.getStudentMark_aspx_html()
+
+        // WHEN
+        trueDoc.parseSubjectWithMarksFlow().collect {
+            mlist.add(it)
+        }
+
+        // THEN
+        assertThat(
+            mlist.size,
+            greaterThan(0)
+        ).also { println("assert passed with List<SubjectWithMarks>.size = ${mlist.size}") }
+
+        mlist.clear()
+        // GIVEN
+        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+
+        // WHEN
+        falseDoc.parseSubjectWithMarksFlow().collect { mlist.add(it) }
 
         // THEN
         assertThat(mlist.size, equalTo(0))

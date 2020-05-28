@@ -18,4 +18,8 @@ object DummyDocument {
     fun getStudentTimeTable_aspx_html(): Document {
         return Jsoup.parse(javaClass.classLoader!!.getResource("StudentTimeTable.html").readText())
     }
+
+    fun getStudentMark_aspx_html(): Document {
+        return Jsoup.parse(javaClass.classLoader!!.getResource("StudentMark.html").readText())
+    }
 }
