@@ -7,8 +7,12 @@ import com.toandv.mytlu.local.entity.ExamTimetable
 import com.toandv.mytlu.local.entity.Schedule
 import com.toandv.mytlu.local.entity.SubjectWithMarks
 import com.toandv.mytlu.local.entity.Tuition
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.greaterThan
@@ -111,15 +115,17 @@ class DocumentExtensionsKtTest {
     }
 
     @Test
-    fun parseListDetailMarkFlow() = runBlockingTest {
+    fun parseSubjectWithMarksFlow_trueDoc_falseDoc_notCrash() = runBlockingTest {
         val mlist = mutableListOf<SubjectWithMarks>()
 
         // GIVEN
         val trueDoc = DummyDocument.getStudentMark_aspx_html()
 
         // WHEN
+
         trueDoc.parseSubjectWithMarksFlow().collect {
             mlist.add(it)
+            println(it)
         }
 
         // THEN

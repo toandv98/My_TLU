@@ -14,7 +14,14 @@ import org.joda.time.format.DateTimeFormat
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
+import java.util.regex.Matcher
 
+/**
+ *  Parse data from document of this URL:
+ *  http://dangky.tlu.edu.vn/cmcsoft.iu.web.info/StudentViewExamList.aspx
+ *
+ *  @return flow of [ExamTimetable] cold data stream
+ */
 @ExperimentalCoroutinesApi
 fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
     val formatter = DateTimeFormat.forPattern(INPUT_DATE_TIME_FORMAT)
@@ -33,7 +40,7 @@ fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
                 formatter.parseLocalDateTime(
                     "%s %s".format(
                         items[4].text(),
-                        if (matcher.find()) matcher.group() else "00:00"
+                        matcher.nextOrNull() ?: "00:00"
                     )
                 ),
                 rawTime,
@@ -43,6 +50,13 @@ fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
         } ?: flowOf()
 }
 
+/**
+ *  Parse data from document of this URL:
+ *  http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx
+ *
+ *  @param resources application resource to retrieve string values
+ *  @return flow of [Tuition] cold data stream
+ */
 @ExperimentalCoroutinesApi
 fun Document.parseTuitionDataFlow(resources: Resources): Flow<Tuition> = flow {
     if (title() != ".: Học phí sinh viên :.") return@flow
@@ -107,9 +121,15 @@ fun Document.parseTuitionDataFlow(resources: Resources): Flow<Tuition> = flow {
         }?.let { emitAll(it) }
 }
 
+/**
+ *  Parse data from document of this URL:
+ *  http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx
+ *
+ *  @return flow of [Schedule] cold data stream
+ */
 @ExperimentalCoroutinesApi
-fun Document.parseScheduleDataFlow(): Flow<Schedule> =
-    takeIf { title() == ".: Thời khóa biểu sinh viên :." }
+fun Document.parseScheduleDataFlow(): Flow<Schedule> {
+    return takeIf { title() == ".: Thời khóa biểu sinh viên :." }
         ?.select("#gridRegistered tr")
         ?.asFlow()
         ?.filter {
@@ -145,6 +165,7 @@ fun Document.parseScheduleDataFlow(): Flow<Schedule> =
                 Schedule(name, code, classRoom, classTime, from, to, status)
             }.let { emitAll(it) }
         } ?: flowOf()
+}
 
 private fun String.isMulti(): Boolean = substring(30, 33).matches("""\(\d\)""".toRegex())
 
@@ -237,26 +258,62 @@ fun Document.parseStudentMarkDataFlow(): Flow<Subject> = TODO()
  * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx
  * @return [Flow] of [SubjectWithMarks] from the document
  */
+@ExperimentalCoroutinesApi
 fun Document.parseSubjectWithMarksFlow(): Flow<SubjectWithMarks> =
     takeIf { title() == ".: Bảng điểm :." }
-        ?.select("tblStudentMark tr")
+        ?.select("#tblStudentMark tr")
         ?.asFlow()
         ?.filter { it.className() != "DataGridFixedHeader" && it.children().size > 13 }
         ?.map<Element, SubjectWithMarks> {
-            val (c, n, tc, l) = it.children().subList(1, 4).map(Element::text)
-            val (qt, th, tk, dc) = it.children().subList(10, 13).map(Element::text)
-            require(l.toInt() > 0)
-            val marks = mutableListOf<Mark>()
-            for (i: Int in 1..l.toInt()) {
-                try {
-                    val quaTrinh = qt.substring((i - 1) * 3, i * 3).toFloat()
-                    val thi = th.substring((i - 1) * 3, i * 3).toFloat()
-                    val tongKet = tk.substring((i - 1) * 3, i * 3).toFloat()
-                    val diemChu = dc[i - 1]
-                    marks.add(Mark(c, i, quaTrinh, thi, tongKet, diemChu))
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+            val (maMon, ten, soTinChi, lan) = it.children().subList(1, 5).map(Element::text)
+            val markPattern = """(\d+\.\d+|\d+)""".toPattern()
+            val (quaTrinh, thi, tongKet) = it.children().subList(10, 13).map { child ->
+                markPattern.matcher(child.text())
             }
-            SubjectWithMarks(Subject(c, n, tc.toInt()), marks)
+            val diemChu = """[A-F]""".toPattern().matcher(it.child(13).text())
+            require(lan.toInt() > 0)
+            val marks = mutableListOf<Mark>()
+            for (i: Int in 1..lan.toInt()) {
+                marks.add(
+                    Mark(
+                        maMon, i,
+                        quaTrinh.nextOrNull()?.toFloat() ?: 0f,
+                        thi.nextOrNull()?.toFloat() ?: 0f,
+                        tongKet.nextOrNull()?.toFloat() ?: 0f,
+                        diemChu.nextOrNull()?.get(0) ?: ' '
+                    )
+                )
+            }
+            SubjectWithMarks(Subject(maMon, ten, soTinChi.toInt()), marks)
         } ?: flowOf()
+
+private fun Matcher.nextOrNull(): String? = if (find()) group() else null
+
+@ExperimentalCoroutinesApi
+suspend fun Document.parseSumMarksFlow(): Flow<SumMark> =
+    takeIf { title() == ".: Bảng điểm :." }
+        ?.select("#grdResult tr")
+        ?.asFlow()
+        ?.drop(1)
+        ?.map { element ->
+            val indexes = setOf(0, 1, 4, 10)
+            val (year, semester, cAverage, average) = indexes.map { element.child(it).text() }
+            Semester(year, semester, cAverage, average)
+        }?.toList()
+        ?.groupBy(Semester::year)
+        ?.entries
+        ?.asFlow()
+        ?.map<Map.Entry<String, List<Semester>>,SumMark> { (key, value) ->
+            if (key == "Toàn khóa") {
+                val (year, semester, cAverage, average) = value.first()
+                TODO()
+            }
+            else TODO("hoi lai Toan truoc khi viet")
+        } ?: flowOf()
+
+data class Semester(
+    val year: String,
+    val semester: String,
+    val cumulativeAverage: String,
+    val average: String
+)
