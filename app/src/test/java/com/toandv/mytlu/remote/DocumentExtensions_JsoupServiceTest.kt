@@ -58,10 +58,7 @@ class DocumentExtensions_JsoupServiceTest {
         val actualSize = 3
 
         // WHEN
-        val count = examTableDoc.parseExamTableDataFlow().count {
-            println(it)
-            true
-        }
+        val count = examTableDoc.parseExamTableDataFlow().count()
 
         // THEN
         assertThat(count, `is`(actualSize))
@@ -81,10 +78,7 @@ class DocumentExtensions_JsoupServiceTest {
         val trueDoc = jsoupService.getTuitionDoc()
 
         // when
-        val count = trueDoc.parseTuitionDataFlow(resources).count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseTuitionDataFlow(resources).count()
 
         // then
         assertThat(count, greaterThanOrEqualTo(14))
@@ -97,10 +91,7 @@ class DocumentExtensions_JsoupServiceTest {
 
         // when
         val trueDoc = jsoupService.getTimetableDoc(ky2_2019_2020)
-        val count = trueDoc.parseScheduleDataFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseScheduleDataFlow().count()
 
         // then
         assertThat(count, greaterThanOrEqualTo(10))
@@ -114,10 +105,7 @@ class DocumentExtensions_JsoupServiceTest {
     fun parseSubjectWithMarksFlow_trueDoc_countGreaterThanOrEqualTo53() = runBlockingTest {
         // when
         val trueDoc = jsoupService.getMarkDoc()
-        val count = trueDoc.parseSubjectWithMarksFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseSubjectWithMarksFlow().count()
 
         // then
         assertThat(count, greaterThanOrEqualTo(53))
@@ -127,10 +115,7 @@ class DocumentExtensions_JsoupServiceTest {
     fun parseSummarySemesterFlow_trueDoc_countGreaterThanOrEqualTo13() = runBlockingTest {
         // when
         val trueDoc = jsoupService.getMarkDoc()
-        val count = trueDoc.parseSummarySemesterFlow().count{
-            println(it)
-            true
-        }
+        val count = trueDoc.parseSummarySemesterFlow().count()
 
         // then
         assertThat(count, greaterThanOrEqualTo(13))

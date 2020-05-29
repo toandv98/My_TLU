@@ -20,7 +20,10 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            // Code shrinking
+            minifyEnabled true
+            // Resource shrinking
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,11 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    viewBinding {
-        enabled = true
-    }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
     testOptions {
         unitTests {

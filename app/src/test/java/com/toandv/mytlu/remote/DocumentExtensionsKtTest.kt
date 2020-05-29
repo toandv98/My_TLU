@@ -23,10 +23,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentViewExamList_aspx_html()
 
         // WHEN
-        val count = trueDoc.parseExamTableDataFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseExamTableDataFlow().count()
 
         // THEN
         assertThat(count, equalTo(3))
@@ -49,10 +46,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentTuition_aspx_html()
 
         // WHEN
-        val count = trueDoc.parseTuitionDataFlow(resources).count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseTuitionDataFlow(resources).count()
 
         assertThat(count, greaterThan(0))
             .also { println("assert passed with flow count = $count") }
@@ -75,10 +69,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentTimeTable_aspx_html()
 
         // WHEN
-        val count = trueDoc.parseScheduleDataFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseScheduleDataFlow().count()
 
         // THEN
         assertThat(count, greaterThan(0))
@@ -100,10 +91,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentMark_aspx_html()
 
         // WHEN
-        val count = trueDoc.parseSubjectWithMarksFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parseSubjectWithMarksFlow().count()
 
         // THEN
         assertThat(count, greaterThan(0))
@@ -125,8 +113,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentMark_aspx_html()
 
         // when
-        val count = trueDoc.parseSummarySemesterFlow().count { println(it)
-        true}
+        val count = trueDoc.parseSummarySemesterFlow().count()
 
         // then
         assertThat(count, equalTo(13))
@@ -147,10 +134,7 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getPractiseMarkAndStudyWarning_aspx_html()
 
         // when
-        val count = trueDoc.parsePractiseMarkFlow().count {
-            println(it)
-            true
-        }
+        val count = trueDoc.parsePractiseMarkFlow().count()
 
         // then
         assertThat(count, equalTo(10))
