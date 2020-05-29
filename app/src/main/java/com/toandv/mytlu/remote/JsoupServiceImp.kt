@@ -55,7 +55,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         return getDoc(URL_BASE + URL_PRACTISE)
     }
 
-    override suspend fun getTimetableDoc(semester: String, term: String?): Document {
+    override suspend fun getTimetableDoc(semester: String?, term: String?): Document {
         var timetableDoc = getDoc(URL_BASE + URL_TIMETABLE)
 
         val data = HashMap<String, String>()
@@ -67,7 +67,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         data[HID_LOAI_UU_TIEN_HE_SO_HOC_PHI] =
             timetableDoc.getElementById(HID_LOAI_UU_TIEN_HE_SO_HOC_PHI).`val`()
         data[HID_STUDENT_ID] = timetableDoc.getElementById(HID_STUDENT_ID).`val`()
-        data[DRP_SEMESTER] = semester
+        data[DRP_SEMESTER] = semester ?: ""
 
         timetableDoc = postDoc(URL_BASE + URL_TIMETABLE, data)
         if (term.isNullOrEmpty()) return timetableDoc
@@ -81,10 +81,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         return postDoc(URL_BASE + URL_TIMETABLE, data)
     }
 
-    override suspend fun getExamTimetableDoc(
-        semester: String,
-        dot: String?
-    ): Document {
+    override suspend fun getExamTimetableDoc(semester: String?, dot: String?): Document {
         var examDoc = getDoc(URL_BASE + URL_EXAM_TIMETABLE)
 
         val data = HashMap<String, String>()
@@ -94,7 +91,7 @@ class JsoupServiceImp(private val ioDispatcher: CoroutineDispatcher = Dispatcher
         data[HID_SHOW_SHIFT_END_TIME] = examDoc.getElementById(HID_SHOW_SHIFT_END_TIME).`val`()
         data[HID_ES_SHOW_ROOM_CODE] = examDoc.getElementById(HID_ES_SHOW_ROOM_CODE).`val`()
         data[HID_STUDENT_ID] = examDoc.getElementById(HID_STUDENT_ID).`val`()
-        data[DRP_SEMESTER] = semester
+        data[DRP_SEMESTER] = semester ?: ""
 
         examDoc = postDoc(URL_BASE + URL_EXAM_TIMETABLE, data)
         if (dot.isNullOrEmpty()) return examDoc

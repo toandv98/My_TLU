@@ -3,8 +3,11 @@ package com.toandv.mytlu.remote
 import android.content.res.Resources
 import com.toandv.mytlu.R
 import com.toandv.mytlu.local.entity.*
-import com.toandv.mytlu.utils.INPUT_DATE_FORMAT
-import com.toandv.mytlu.utils.INPUT_DATE_TIME_FORMAT
+import com.toandv.mytlu.remote.domain.ClassTime
+import com.toandv.mytlu.remote.domain.PracticeSemester
+import com.toandv.mytlu.remote.domain.SummarySemester
+import com.toandv.mytlu.remote.domain.TimeTable
+import com.toandv.mytlu.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import org.joda.time.LocalDate
@@ -17,6 +20,11 @@ import org.jsoup.select.Elements
 import java.util.regex.Matcher
 
 /**
+ * org.jsoup.nodes.Document Extensions functions for crawling data.
+ * be created, written, maintained by @author
+ * @author Vu Chi Cong, congvc62@wru.vn */
+
+/**
  *  Parse data from document of this URL:
  *  http://dangky.tlu.edu.vn/cmcsoft.iu.web.info/StudentViewExamList.aspx
  *
@@ -25,10 +33,11 @@ import java.util.regex.Matcher
 @ExperimentalCoroutinesApi
 fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
     val formatter = DateTimeFormat.forPattern(INPUT_DATE_TIME_FORMAT)
-    return takeIf { title() == ".: Lịch thi cá nhân sinh viên :." }
+    return takeIf { title() == ".: Lịch thi cá nhân sinh viên :." || baseUri() == URL_BASE + URL_EXAM_TIMETABLE }
         ?.select("#tblCourseList tr")
         ?.asFlow()
-        ?.filter { it.className() != "DataGridFixedHeader" && it.childrenSize() > 8 }
+        ?.drop(1)
+        ?.filter {  it.childrenSize() == 10 }
         ?.map { element ->
             val items = element.select("td")
             val rawTime = items[5].text()
@@ -47,8 +56,12 @@ fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
                 items[7].text(),
                 items[8].text()
             )
-        } ?: flowOf()
+        }
+        ?: wrongDocument(URL_EXAM_TIMETABLE, baseUri())
 }
+
+private fun wrongDocument(expectedURL: String, actualURL: String): Nothing =
+    throw IllegalArgumentException("Wrong document! Should have been this url: $expectedURL, but was: $actualURL")
 
 /**
  *  Parse data from document of this URL:
@@ -59,7 +72,8 @@ fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
  */
 @ExperimentalCoroutinesApi
 fun Document.parseTuitionDataFlow(resources: Resources): Flow<Tuition> = flow {
-    if (title() != ".: Học phí sinh viên :.") return@flow
+    if (!(title() == ".: Học phí sinh viên :." || baseUri() == URL_BASE + URL_TUITION))
+        throw wrongDocument(URL_TUITION, baseUri())
 
     getElementById("lblSoTaiKhoanNganHang")?.let {
         emit(
@@ -109,7 +123,8 @@ fun Document.parseTuitionDataFlow(resources: Resources): Flow<Tuition> = flow {
     selectFirst("#divOut #tblPaid")
         ?.select("tr")
         ?.asFlow()
-        ?.filter { it.className() != "DataGridFixedHeader" && it.childrenSize() > 3 }
+        ?.drop(1)
+        ?.filter { it.childrenSize() == 4 }
         ?.map {
             val item = it.select("td")
             Tuition(
@@ -127,16 +142,15 @@ fun Document.parseTuitionDataFlow(resources: Resources): Flow<Tuition> = flow {
  *
  *  @return flow of [Schedule] cold data stream
  */
+// Warning: do not delete both this line and ExplicitTypeArguments
+@Suppress("RemoveExplicitTypeArguments")
 @ExperimentalCoroutinesApi
 fun Document.parseScheduleDataFlow(): Flow<Schedule> {
-    return takeIf { title() == ".: Thời khóa biểu sinh viên :." }
+    return takeIf { title() == ".: Thời khóa biểu sinh viên :." || baseUri() == URL_BASE + URL_TIMETABLE }
         ?.select("#gridRegistered tr")
         ?.asFlow()
-        ?.filter {
-            it.className() != "DataGridFixedHeader"
-                    && it.childrenSize() > 4
-                    && !it.child(0).text().isNullOrEmpty()
-        }
+        ?.drop(1)
+        ?.filter { it.childrenSize() == 10 && !it.child(0).text().isNullOrEmpty() }
         ?.map {
             val item = it.select("td")
             TimeTable(
@@ -164,7 +178,8 @@ fun Document.parseScheduleDataFlow(): Flow<Schedule> {
                 }
                 Schedule(name, code, classRoom, classTime, from, to, status)
             }.let { emitAll(it) }
-        } ?: flowOf()
+        }
+        ?: wrongDocument(URL_TIMETABLE, baseUri())
 }
 
 private fun String.isMulti(): Boolean = substring(30, 33).matches("""\(\d\)""".toRegex())
@@ -217,6 +232,14 @@ private fun String.getDayOfWeek(): Flow<ClassTime> = flow {
     }
 }
 
+@Deprecated(
+    "Mapping giờ học sau, lưu tiết học",
+    ReplaceWith(
+        "Lưu tiết học bắt đầu và kết thúc, lúc nào gọi ở UI thì mới map sang giờ. " +
+                "Do giờ giấc ở các cơ sở khác nhau thì có thể khác nhau."
+    ),
+    DeprecationLevel.WARNING
+)
 private fun getTimeFromClassHour(classHour: Int): LocalTime = when (classHour) {
     1 -> 7 to 0
     2 -> 7 to 55
@@ -236,31 +259,15 @@ private fun getTimeFromClassHour(classHour: Int): LocalTime = when (classHour) {
     else -> 0 to 0
 }.run { LocalTime(first, second) }
 
-private data class ClassTime(
-    val fromPeriod: Int,
-    val toPeriod: Int,
-    val classTime: LocalDateTime
-)
-
-private data class TimeTable(
-    val name: String,
-    val code: String,
-    val time: String,
-    val room: String
-) {
-    val id = 0
-}
-
-fun Document.parseStudentMarkDataFlow(): Flow<Subject> = TODO()
-
 /**
  * parse [SubjectWithMarks] from the [Document] of this URL:
  * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx
+ *
  * @return [Flow] of [SubjectWithMarks] from the document
  */
 @ExperimentalCoroutinesApi
 fun Document.parseSubjectWithMarksFlow(): Flow<SubjectWithMarks> =
-    takeIf { title() == ".: Bảng điểm :." }
+    takeIf { title() == ".: Bảng điểm :." || baseUri() == URL_BASE + URL_MARK }
         ?.select("#tblStudentMark tr")
         ?.asFlow()
         ?.filter { it.className() != "DataGridFixedHeader" && it.children().size > 13 }
@@ -285,12 +292,18 @@ fun Document.parseSubjectWithMarksFlow(): Flow<SubjectWithMarks> =
                 )
             }
             SubjectWithMarks(Subject(maMon, ten, soTinChi.toInt()), marks)
-        } ?: flowOf()
+        } ?: wrongDocument(URL_MARK, baseUri())
 
 private fun Matcher.nextOrNull(): String? = if (find()) group() else null
 
+/**
+ * parse [SummarySemester] from [Document] of this URL:
+ * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx
+ *
+ * @return [Flow] of [SummarySemester] cold data stream
+ */
 @ExperimentalCoroutinesApi
-suspend fun Document.parseSumMarksFlow(): Flow<SumMark> =
+fun Document.parseSummarySemesterFlow(): Flow<SummarySemester> =
     takeIf { title() == ".: Bảng điểm :." }
         ?.select("#grdResult tr")
         ?.asFlow()
@@ -298,22 +311,35 @@ suspend fun Document.parseSumMarksFlow(): Flow<SumMark> =
         ?.map { element ->
             val indexes = setOf(0, 1, 4, 10)
             val (year, semester, cAverage, average) = indexes.map { element.child(it).text() }
-            Semester(year, semester, cAverage, average)
-        }?.toList()
-        ?.groupBy(Semester::year)
-        ?.entries
-        ?.asFlow()
-        ?.map<Map.Entry<String, List<Semester>>,SumMark> { (key, value) ->
-            if (key == "Toàn khóa") {
-                val (year, semester, cAverage, average) = value.first()
-                TODO()
-            }
-            else TODO("hoi lai Toan truoc khi viet")
-        } ?: flowOf()
+            SummarySemester(
+                year,
+                semester,
+                cAverage,
+                average
+            )
+        } ?: wrongDocument(URL_MARK, baseUri())
 
-data class Semester(
-    val year: String,
-    val semester: String,
-    val cumulativeAverage: String,
-    val average: String
-)
+/**
+ * parse [PracticeSemester] from [Document] of this URL:
+ * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/PractiseMarkAndStudyWarning.aspx
+ *
+ * @return [Flow] of [PracticeSemester] cold data stream
+ */
+@ExperimentalCoroutinesApi
+fun Document.parsePractiseMarkFlow(): Flow<PracticeSemester> =
+    takeIf { title() == ".: Điểm rèn luyện và xử lý học vụ :." || baseUri() == URL_BASE + URL_PRACTISE }
+        ?.selectFirst("#tblPaid")
+        ?.select("tr")
+        ?.asFlow()
+        ?.drop(1)
+        ?.filter { it.children().size == 5 }
+        ?.map {
+            val (_, year, semester, mark, grade) = it.children().map(Element::text)
+            PracticeSemester(
+                year,
+                semester,
+                mark,
+                grade
+            )
+        } ?: wrongDocument(URL_PRACTISE, baseUri())
+

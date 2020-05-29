@@ -3,16 +3,9 @@ package com.toandv.mytlu.remote
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.toandv.mytlu.MyTluApplication
-import com.toandv.mytlu.local.entity.ExamTimetable
-import com.toandv.mytlu.local.entity.Schedule
-import com.toandv.mytlu.local.entity.SubjectWithMarks
-import com.toandv.mytlu.local.entity.Tuition
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.greaterThan
@@ -25,123 +18,149 @@ import org.junit.runner.RunWith
 class DocumentExtensionsKtTest {
 
     @Test
-    fun parseExamTableDataFlow_trueDoc_falseDoc_notCrash() = runBlockingTest {
-        val mlist = mutableListOf<ExamTimetable>()
+    fun parseExamTableDataFlow_trueDoc() = runBlockingTest {
         // GIVEN
         val trueDoc = DummyDocument.getStudentViewExamList_aspx_html()
 
         // WHEN
-        trueDoc.parseExamTableDataFlow().collect {
-            mlist.add(it)
+        val count = trueDoc.parseExamTableDataFlow().count {
             println(it)
+            true
         }
 
         // THEN
-        assertThat(
-            mlist.size,
-            equalTo(3)
-        ).also { println("assert passed with List<ExamTimetable>.size = ${mlist.size}") }
+        assertThat(count, equalTo(3))
+    }
 
-        mlist.clear()
+    @Test(expected = IllegalArgumentException::class)
+    fun parseExamTableDataFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
         val falseDoc = DummyDocument.getStudentTuition_aspx_html()
 
         // WHEN
-        falseDoc.parseExamTableDataFlow().collect { mlist.add(it) }
-
-        // THEN
-        assertThat(mlist.size, equalTo(0))
+        falseDoc.parseExamTableDataFlow().first()
     }
 
     @Test
-    fun parseTuitionData_trueDoc_falseDoc_notCrash() = runBlockingTest {
+    fun parseTuitionData_trueDoc() = runBlockingTest {
         val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
         requireNotNull(resources)
-
-        val mlist = mutableListOf<Tuition>()
-
         // GIVEN
         val trueDoc = DummyDocument.getStudentTuition_aspx_html()
-        trueDoc.parseTuitionDataFlow(resources).collect {
-            mlist.add(it)
+
+        // WHEN
+        val count = trueDoc.parseTuitionDataFlow(resources).count {
             println(it)
+            true
         }
 
-        assertThat(
-            mlist.size,
-            greaterThan(0)
-        ).also { println("assert passed with List<Tuition>.size = ${mlist.size}") }
+        assertThat(count, greaterThan(0))
+            .also { println("assert passed with flow count = $count") }
+    }
 
-        mlist.clear()
+    @Test(expected = IllegalArgumentException::class)
+    fun parseTuitionData_falseDoc_throwException() = runBlockingTest {
+        val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
+        requireNotNull(resources)
         // GIVEN
         val falseDoc = DummyDocument.getStudentViewExamList_aspx_html()
 
         // WHEN
-        falseDoc.parseTuitionDataFlow(resources).collect { mlist.add(it) }
-
-        // THEN
-        assertThat(mlist.size, equalTo(0))
+        falseDoc.parseTuitionDataFlow(resources).first()
     }
 
     @Test
-    fun parseScheduleDataFlow_trueDoc_falseDoc_notCrash() = runBlockingTest {
-        val mlist = mutableListOf<Schedule>()
-
+    fun parseScheduleDataFlow_trueDoc() = runBlockingTest {
         // GIVEN
         val trueDoc = DummyDocument.getStudentTimeTable_aspx_html()
 
         // WHEN
-        trueDoc.parseScheduleDataFlow().collect {
-            mlist.add(it)
+        val count = trueDoc.parseScheduleDataFlow().count {
+            println(it)
+            true
         }
 
         // THEN
-        assertThat(
-            mlist.size,
-            greaterThan(0)
-        ).also { println("assert passed with List<Schedule>.size = ${mlist.size}") }
+        assertThat(count, greaterThan(0))
+            .also { println("assert passed with flow count = $count") }
+    }
 
-        mlist.clear()
+    @Test(expected = IllegalArgumentException::class)
+    fun parseScheduleDataFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
         val falseDoc = DummyDocument.getStudentTuition_aspx_html()
 
         // WHEN
-        falseDoc.parseScheduleDataFlow().collect {
-            mlist.add(it)
-        }
-
-        // THEN
-        assertThat(mlist.size, equalTo(0))
+        falseDoc.parseScheduleDataFlow().first()
     }
 
     @Test
-    fun parseSubjectWithMarksFlow_trueDoc_falseDoc_notCrash() = runBlockingTest {
-        val mlist = mutableListOf<SubjectWithMarks>()
-
+    fun parseSubjectWithMarksFlow_trueDoc() = runBlockingTest {
         // GIVEN
         val trueDoc = DummyDocument.getStudentMark_aspx_html()
 
         // WHEN
-
-        trueDoc.parseSubjectWithMarksFlow().collect {
-            mlist.add(it)
+        val count = trueDoc.parseSubjectWithMarksFlow().count {
             println(it)
+            true
         }
 
         // THEN
-        assertThat(
-            mlist.size,
-            greaterThan(0)
-        ).also { println("assert passed with List<SubjectWithMarks>.size = ${mlist.size}") }
+        assertThat(count, greaterThan(0))
+            .also { println("assert passed with flow count = $count") }
+    }
 
-        mlist.clear()
+    @Test(expected = IllegalArgumentException::class)
+    fun parseSubjectWithMarksFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
         val falseDoc = DummyDocument.getStudentTuition_aspx_html()
 
         // WHEN
-        falseDoc.parseSubjectWithMarksFlow().collect { mlist.add(it) }
+        falseDoc.parseSubjectWithMarksFlow().first()
+    }
 
-        // THEN
-        assertThat(mlist.size, equalTo(0))
+    @Test
+    fun parseSummarySemesterFlow_trueDoc() = runBlockingTest {
+        // given
+        val trueDoc = DummyDocument.getStudentMark_aspx_html()
+
+        // when
+        val count = trueDoc.parseSummarySemesterFlow().count { println(it)
+        true}
+
+        // then
+        assertThat(count, equalTo(13))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun parseSummarySemesterFlow_falseDoc_throwException() = runBlockingTest {
+        // given
+        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+
+        // when
+        falseDoc.parseSummarySemesterFlow().first()
+    }
+
+    @Test
+    fun parsePractiseMarkFlow_trueDoc() = runBlockingTest {
+        // given
+        val trueDoc = DummyDocument.getPractiseMarkAndStudyWarning_aspx_html()
+
+        // when
+        val count = trueDoc.parsePractiseMarkFlow().count {
+            println(it)
+            true
+        }
+
+        // then
+        assertThat(count, equalTo(10))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun parsePractiseMarkFlow_falseDoc_throwException() = runBlockingTest {
+        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+
+        // when
+        falseDoc.parsePractiseMarkFlow().first()
     }
 }

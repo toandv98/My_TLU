@@ -1,22 +1,28 @@
+@file:Suppress("ClassName")
+
 package com.toandv.mytlu.remote
 
-import com.toandv.mytlu.local.entity.ExamTimetable
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.toandv.mytlu.MyTluApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.greaterThanOrEqualTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.security.MessageDigest
 
 @InternalCoroutinesApi
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4::class)
 class DocumentExtensions_JsoupServiceTest {
     private lateinit var jsoupService: JsoupService
 
@@ -45,69 +51,101 @@ class DocumentExtensions_JsoupServiceTest {
     }
 
     @Test
-    fun parseExampData_ky1_2019_2020_size3() = runBlockingTest {
-        assertThat(jsoupService.isLoggedIn, equalTo(true))
+    fun parseExampDataFlow_ky1_2019_2020_size3() = runBlockingTest {
         // GIVEN
         val ky1_2019_2020 = "bf298b4722c84138b4dea0f498e8bc59"
         val examTableDoc = jsoupService.getExamTimetableDoc(ky1_2019_2020)
         val actualSize = 3
 
         // WHEN
-        val result = examTableDoc.parseExamTableDataFlow()
-        val examTimeList = mutableListOf<ExamTimetable>()
-
-        result.collect {
-            examTimeList.add(it)
+        val count = examTableDoc.parseExamTableDataFlow().count {
             println(it)
+            true
         }
 
         // THEN
-        assertThat(examTimeList.size, `is`(actualSize))
+        assertThat(count, `is`(actualSize))
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException::class)
     fun parseExamData_falseDocument_notCrash() = runBlockingTest {
-        assertThat(jsoupService.isLoggedIn, equalTo(true))
-
-        val examTimeList = mutableListOf<ExamTimetable>()
         // false Document
-        jsoupService.getMarkDoc()
-            .parseExamTableDataFlow()
-            .collect{
-                examTimeList.add(it)
-            }
-
-        // PASS1
-        assertThat(examTimeList.size, equalTo(0))
-
-        // logout
-        jsoupService.logout()
-        assertThat(jsoupService.isLoggedIn, equalTo(false))
-        jsoupService.login(acc, "false password")
-        examTimeList.clear()
-
-        // GIVEN
-        val ky1_2019_2020 = "bf298b4722c84138b4dea0f498e8bc59"
-        // false document
-        jsoupService.getExamTimetableDoc(ky1_2019_2020)
-            .parseExamTableDataFlow()
-            .collect{
-                examTimeList.add(it)
-            }
-
-        // PASS2
-        assertThat(examTimeList.size, equalTo(0))
+        jsoupService.getMarkDoc().parseExamTableDataFlow().first()
     }
 
     @Test
-    fun flowTest() = runBlockingTest {
-        val flow = flowOf(1, 2, 3)
+    fun parseTuitionDataFlow_trueDocument_countGreaterOrEqual14() = runBlockingTest {
+        // given
+        val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
+        requireNotNull(resources)
+        val trueDoc = jsoupService.getTuitionDoc()
 
-        val mlist = mutableListOf<Int>()
-        flow.collect {
-            mlist.add(it)
+        // when
+        val count = trueDoc.parseTuitionDataFlow(resources).count {
+            println(it)
+            true
         }
 
-        assertThat(mlist.size, `is`(3))
+        // then
+        assertThat(count, greaterThanOrEqualTo(14))
+    }
+
+    @Test
+    fun parseScheduleDataFlow_trueDoc_countGreaterThanOrEqualTo10() = runBlockingTest {
+        // given
+        val ky2_2019_2020 = "5ad062230c5c4973a1bd241ed876d6fb"
+
+        // when
+        val trueDoc = jsoupService.getTimetableDoc(ky2_2019_2020)
+        val count = trueDoc.parseScheduleDataFlow().count {
+            println(it)
+            true
+        }
+
+        // then
+        assertThat(count, greaterThanOrEqualTo(10))
+
+        // Pass2
+        jsoupService.getTimetableDoc().parseScheduleDataFlow().count()
+            .let { assertThat(it, greaterThanOrEqualTo(0)) }
+    }
+
+    @Test
+    fun parseSubjectWithMarksFlow_trueDoc_countGreaterThanOrEqualTo53() = runBlockingTest {
+        // when
+        val trueDoc = jsoupService.getMarkDoc()
+        val count = trueDoc.parseSubjectWithMarksFlow().count {
+            println(it)
+            true
+        }
+
+        // then
+        assertThat(count, greaterThanOrEqualTo(53))
+    }
+
+    @Test
+    fun parseSummarySemesterFlow_trueDoc_countGreaterThanOrEqualTo13() = runBlockingTest {
+        // when
+        val trueDoc = jsoupService.getMarkDoc()
+        val count = trueDoc.parseSummarySemesterFlow().count{
+            println(it)
+            true
+        }
+
+        // then
+        assertThat(count, greaterThanOrEqualTo(13))
+    }
+
+    @Test
+    fun parsePractiseMarkFlow_trueDoc_countGreaterThanOrEqualTo10() = runBlockingTest {
+        // when
+        val trueDoc = jsoupService.getPractiseDoc()
+        val count = trueDoc.parsePractiseMarkFlow().count{
+            println(it)
+            true
+        }
+
+        // then
+        assertThat(count, greaterThanOrEqualTo(10))
     }
 }
