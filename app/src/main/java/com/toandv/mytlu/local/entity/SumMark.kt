@@ -3,6 +3,7 @@ package com.toandv.mytlu.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@Deprecated("Dùng class Semester")
 @Entity(tableName = "sum_mark")
 data class SumMark @JvmOverloads constructor(
     val nameHoc: String,

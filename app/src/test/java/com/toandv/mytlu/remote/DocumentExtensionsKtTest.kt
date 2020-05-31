@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.Matchers.greaterThanOrEqualTo
+import org.jsoup.nodes.Document
 import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -125,8 +127,10 @@ class DocumentExtensionsKtTest {
         val trueDoc = DummyDocument.getStudentMark_aspx_html()
 
         // when
-        val count = trueDoc.parseSummarySemesterFlow().count { println(it)
-        true}
+        val count = trueDoc.parseSummarySemesterFlow().count {
+            println(it)
+            true
+        }
 
         // then
         assertThat(count, equalTo(13))
@@ -162,5 +166,33 @@ class DocumentExtensionsKtTest {
 
         // when
         falseDoc.parsePractiseMarkFlow().first()
+    }
+
+    @Test
+    fun `parseSemesterFlow trueDoc`() = runBlockingTest {
+        // given
+        val trueDocs = listOf(
+            DummyDocument.getStudentViewExamList_aspx_html(),
+            DummyDocument.getStudentTimeTable_aspx_html()
+        )
+
+        for (doc: Document in trueDocs) {
+            // when
+            val count = doc.parseSemesterFlow().count {
+                println(it)
+                true
+            }
+            // then
+            assertThat(count, greaterThanOrEqualTo(27))
+        }
+    }
+    
+    @Test(expected = IllegalArgumentException::class)
+    fun `parseSemesterFlow falseDoc notCrash`() = runBlockingTest {
+        // given
+        val falseDoc = DummyDocument.getStudentMark_aspx_html()
+
+        // when
+        falseDoc.parseSemesterFlow().first()
     }
 }

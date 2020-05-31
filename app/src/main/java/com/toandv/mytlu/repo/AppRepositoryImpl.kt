@@ -24,7 +24,7 @@ class AppRepositoryImpl constructor(
                 val doc = jsoupService.getMarkDoc()
                 //TODO implement this @Toandv
                 ensureActive()
-                database.sumMarkDao().insertSumMarks()
+//                database.sumMarkDao().insertSummarySemester()
             }
             ensureActive()
             launch(ioDispatcher) {
@@ -36,6 +36,7 @@ class AppRepositoryImpl constructor(
         }
     }
 
+    @Deprecated("Không nên dùng Deferred", ReplaceWith("suspend fun"), DeprecationLevel.WARNING)
     private suspend fun examTimeTablesData(document: Document): Deferred<List<ExamTimetable>> = withContext(ioDispatcher){
         return@withContext async {
             val examTimetables = mutableListOf<ExamTimetable>()

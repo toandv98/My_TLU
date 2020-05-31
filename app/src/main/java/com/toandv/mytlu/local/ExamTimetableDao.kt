@@ -7,11 +7,13 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.toandv.mytlu.local.entity.ExamTimetable
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.flow.Flow
 
 abstract class ExamTimetableDao {
     @Query("select * from exam_timetables order by datetime")
-    abstract fun getAll(): LiveData<List<ExamTimetable>>
+    abstract fun getAll(): Flow<List<ExamTimetable>>
 
+    @Deprecated("Không nên dùng Deferred", ReplaceWith("suspend fun"), DeprecationLevel.WARNING)
     @Query("select * from exam_timetables order by datetime")
     abstract suspend fun getAllAsync(): Deferred<List<ExamTimetable>>
 

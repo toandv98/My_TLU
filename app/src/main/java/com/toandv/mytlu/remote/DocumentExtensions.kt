@@ -4,8 +4,6 @@ import android.content.res.Resources
 import com.toandv.mytlu.R
 import com.toandv.mytlu.local.entity.*
 import com.toandv.mytlu.remote.domain.ClassTime
-import com.toandv.mytlu.remote.domain.PracticeSemester
-import com.toandv.mytlu.remote.domain.SummarySemester
 import com.toandv.mytlu.remote.domain.TimeTable
 import com.toandv.mytlu.utils.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,28 +32,38 @@ import java.util.regex.Matcher
 fun Document.parseExamTableDataFlow(): Flow<ExamTimetable> {
     val formatter = DateTimeFormat.forPattern(INPUT_DATE_TIME_FORMAT)
     return takeIf { title() == ".: Lịch thi cá nhân sinh viên :." || baseUri() == URL_BASE + URL_EXAM_TIMETABLE }
-        ?.select("#tblCourseList tr")
-        ?.asFlow()
-        ?.drop(1)
-        ?.filter {  it.childrenSize() == 10 }
-        ?.map { element ->
-            val items = element.select("td")
-            val rawTime = items[5].text()
-            val matcher = """\d\d:\d\d""".toPattern().matcher(rawTime)
-            ExamTimetable(
-                items[1].text(),
-                items[2].text(),
-                items[3].text(),
-                formatter.parseLocalDateTime(
-                    "%s %s".format(
-                        items[4].text(),
-                        matcher.nextOrNull() ?: "00:00"
+        ?.run {
+            val semester = with(select("""#drpSemester option[selected="selected"]""")) {
+                val code = `val`()
+                val text = text()
+                Semester(text.substring(2), text[0].toString(), code)
+            }
+            val dot = select("#drpDotThi").text()
+            select("#tblCourseList tr")
+                ?.asFlow()
+                ?.drop(1)
+                ?.filter { it.childrenSize() == 10 }
+                ?.map { element ->
+                    val items = element.select("td")
+                    val rawTime = items[5].text()
+                    val matcher = """\d\d:\d\d""".toPattern().matcher(rawTime)
+                    ExamTimetable(
+                        semester,
+                        dot,
+                        items[1].text(),
+                        items[2].text(),
+                        items[3].text(),
+                        formatter.parseLocalDateTime(
+                            "%s %s".format(
+                                items[4].text(),
+                                matcher.nextOrNull() ?: "00:00"
+                            )
+                        ),
+                        rawTime,
+                        items[7].text(),
+                        items[8].text()
                     )
-                ),
-                rawTime,
-                items[7].text(),
-                items[8].text()
-            )
+                }
         }
         ?: wrongDocument(URL_EXAM_TIMETABLE, baseUri())
 }
@@ -320,13 +328,13 @@ fun Document.parseSummarySemesterFlow(): Flow<SummarySemester> =
         } ?: wrongDocument(URL_MARK, baseUri())
 
 /**
- * parse [PracticeSemester] from [Document] of this URL:
+ * parse [PractiseSemester] from [Document] of this URL:
  * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/PractiseMarkAndStudyWarning.aspx
  *
- * @return [Flow] of [PracticeSemester] cold data stream
+ * @return [Flow] of [PractiseSemester] cold data stream
  */
 @ExperimentalCoroutinesApi
-fun Document.parsePractiseMarkFlow(): Flow<PracticeSemester> =
+fun Document.parsePractiseMarkFlow(): Flow<PractiseSemester> =
     takeIf { title() == ".: Điểm rèn luyện và xử lý học vụ :." || baseUri() == URL_BASE + URL_PRACTISE }
         ?.selectFirst("#tblPaid")
         ?.select("tr")
@@ -335,7 +343,7 @@ fun Document.parsePractiseMarkFlow(): Flow<PracticeSemester> =
         ?.filter { it.children().size == 5 }
         ?.map {
             val (_, year, semester, mark, grade) = it.children().map(Element::text)
-            PracticeSemester(
+            PractiseSemester(
                 year,
                 semester,
                 mark,
@@ -343,3 +351,21 @@ fun Document.parsePractiseMarkFlow(): Flow<PracticeSemester> =
             )
         } ?: wrongDocument(URL_PRACTISE, baseUri())
 
+/**
+ * parse [Semester] from [Document] of either this URL:
+ * http://dangky.tlu.edu.vn/cmcsoft.iu.web.info/StudentViewExamList.aspx
+ * or:
+ * http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx
+ *
+ * @return [Flow] of [Semester] cold data stream
+ */
+fun Document.parseSemesterFlow(): Flow<Semester> =
+    takeIf {
+        title() == ".: Lịch thi cá nhân sinh viên :." || baseUri() == URL_BASE + URL_EXAM_TIMETABLE
+                || title() == ".: Thời khóa biểu sinh viên :." || baseUri() == URL_BASE + URL_TIMETABLE
+    }?.select("#drpSemester option")?.asFlow()
+        ?.map {
+            val code = it.`val`()
+            val text = it.text()
+            Semester(text.substring(2), text[0].toString(), code)
+        } ?: wrongDocument("$URL_EXAM_TIMETABLE or $URL_TIMETABLE", baseUri())
