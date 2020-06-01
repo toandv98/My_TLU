@@ -34,6 +34,7 @@ data class ExamTimetable(
 
     val dot: String,
 
+    @ColumnInfo(name = "ma_mon")
     val code: String,
 
     val name: String,

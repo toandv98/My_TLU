@@ -43,6 +43,14 @@ android {
             includeAndroidResources = true
         }
     }
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/test-common/java"
+        }
+        test {
+            java.srcDirs += "src/test-common/java"
+        }
+    }
 }
 
 dependencies {
@@ -57,6 +65,7 @@ dependencies {
     // AndroidX Test - JVM testing
     testImplementation "androidx.test:core-ktx:$androidXTestCore_version"
     testImplementation "androidx.test.ext:junit:$androidXTestExtKotlinRunner_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_testing_version"
 
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -71,8 +80,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 

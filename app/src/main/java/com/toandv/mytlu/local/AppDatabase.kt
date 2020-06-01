@@ -34,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun studentTuitionDao(): StudentTuitionDao
 
-    abstract fun sumMarkDao(): SemesterDao
+    abstract fun semesterDao(): SemesterDao
 
     companion object {
         @Volatile

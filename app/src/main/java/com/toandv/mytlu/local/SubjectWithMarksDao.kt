@@ -1,15 +1,13 @@
 package com.toandv.mytlu.local
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.toandv.mytlu.local.entity.Mark
 import com.toandv.mytlu.local.entity.Subject
 import com.toandv.mytlu.local.entity.SubjectWithMarks
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
+@Dao
 abstract class SubjectWithMarksDao {
 
     // See this link to know why need @Transaction annotation
@@ -35,7 +33,7 @@ abstract class SubjectWithMarksDao {
     protected abstract suspend fun insertMark(vararg mark: Mark)
 
     @Transaction
-    suspend fun replaceSubjectWithMarksFlow(flow: Flow<SubjectWithMarks>) {
+    open suspend fun replaceSubjectWithMarksFlow(flow: Flow<SubjectWithMarks>) {
         deleteAllSubject()
         deleteAllMarks()
         flow.collect {

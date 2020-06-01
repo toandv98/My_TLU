@@ -1,0 +1,578 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0079)http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx -->
+<!--suppress ALL -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>.: Thời khóa biểu sinh viên :.</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta content="progid:DXImageTransform.Microsoft.Fade(duration=.5)" http-equiv="Page-Exit">
+		<link rel="stylesheet" type="text/css" href="./StudentTimeTable_files/Default.css">
+		<script type="text/javascript" src="./StudentTimeTable_files/util.js"></script>
+	</head>
+	<body leftmargin="5" rightmargin="5" bgproperties="fixed" topmargin="0">
+		<form method="post" action="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx" id="Form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTUwOTAzNzUwNA9kFgICAQ9kFiQCAQ9kFgwCAQ8PFgIeBFRleHQFOUjhu4YgVEjhu5BORyDEkMSCTkcgS8OdIEjhu4xDIC0gxJDhuqBJIEjhu4xDIFRI4bumWSBM4buiSWRkAgIPZBYCZg8PFgQfAAUGVGhvw6F0HhBDYXVzZXNWYWxpZGF0aW9uaGRkAgMPEA8WBh4NRGF0YVRleHRGaWVsZAUGa3loaWV1Hg5EYXRhVmFsdWVGaWVsZAUCSUQeC18hRGF0YUJvdW5kZ2QQFQECVk4VASAyRDhFMTJEMjQ2RDY0QTdCQjNCODlDQzY0ODREMjc3NhQrAwFnFgFmZAIEDw8WAh4ISW1hZ2VVcmwFKC9DTUNTb2Z0LklVLldlYi5JbmZvL0ltYWdlcy9Vc2VySW5mby5naWZkZAIFD2QWCAIBDw8WAh8ABRpWxakgQ2jDrSBDw7RuZygxNjUxMDYwODQ1KWRkAgUPDxYCHwAFClNpbmggdmnDqm5kZAIHDw8WAh4HVmlzaWJsZWhkZAIJDw8WAh8ABRBI4buZcCB0aW4gbmjhuq9uZGQCBw8PFgIfAAWZAcSQxINuZyBrw70gaOG7jWMgPHNwYW4gc3R5bGU9ImZvbnQtc2l6ZToxMHB4Ij4+PC9zcGFuPiA8YSBocmVmPSIvQ01DU29mdC5JVS5XZWIuSW5mby9SZXBvcnRzL0Zvcm0vU3R1ZGVudFRpbWVUYWJsZS5hc3B4Ij5L4bq/dCBxdeG6oyDEkcSDbmcga8O9IGjhu41jPC9hPmRkAgQPZBYCZg9kFgICAQ8PFgIfAAUUSz90IHF1PyBkYW5nIGvDvSBoP2NkZAIGD2QWAmYPDxYCHwFoZGQCCA9kFgJmDw8WBB8ABQZUaG/DoXQfAWhkZAIKD2QWAmYPFgIeCWlubmVyaHRtbAXrDTx1bCBjbGFzcz0nc2lkZWJhci1tZW51Jz48bGkgY2xhc3M9J2hlYWRlcic+REFOSCBN4bukQyBDSMONTkg8L2xpPjxsaSBjbGFzcz0ndHJlZXZpZXcnPiA8YSBocmVmPSIvQ01DU29mdC5JVS5XZWIuSW5mby9Qcm9maWxlL0xpbmtVbmkuYXNweCI+PHNwYW4+Q+G7lW5nIEvhur90IGLhuqFuIFNpbmggdmnDqm4sIFNpw6p1IHRp4buHbiDDrWNoITwvc3Bhbj48L2E+PC9saT48bGk+IDxhPjxpIGNsYXNzPSdmYSBmYS1sYXB0b3AnPjwvaT48c3Bhbj7EkMSDbmcga8O9IGjhu41jPC9zcGFuPjxpIGNsYXNzPSdmYSBmYS1hbmdsZS1sZWZ0IHB1bGwtcmlnaHQnPjwvaT48L2E+PHVsIGNsYXNzPSd0cmVldmlldy1tZW51Jz48bGkgY2xhc3M9J3RyZWV2aWV3Jz4gPGEgaHJlZj0iL0NNQ1NvZnQuSVUuV2ViLmluZm8vU3R1ZHlSZWdpc3Rlci9TdHVkeVJlZ2lzdGVyLmFzcHgiPlNpbmggdmnDqm4gxJHEg25nIGvDvSBo4buNYzwvYT48L2xpPjxsaSBjbGFzcz0ndHJlZXZpZXcnPiA8YSBocmVmPSIvQ01DU29mdC5JVS5XZWIuSW5mby9SZXBvcnRzL0Zvcm0vU3R1ZGVudFRpbWVUYWJsZS5hc3B4Ij5L4bq/dCBxdeG6oyDEkcSDbmcga8O9IGjhu41jPC9hPjwvbGk+PGxpIGNsYXNzPSd0cmVldmlldyc+IDxhIGhyZWY9Ii9DTUNTb2Z0LklVLldlYi5JbmZvL1N0dWR5UmVnaXN0ZXIvUmVnaXN0cmF0aW9uSGlzdG9yeS5hc3B4Ij5RdcOhIHRyw6xuaCDEkcSDbmcga8O9IGjhu41jPC9hPjwvbGk+PGxpIGNsYXNzPSd0cmVldmlldyc+IDxhIGhyZWY9Ii9DTUNTb2Z0LklVLldlYi5JbmZvL1N0dWR5UmVnaXN0ZXIvRGVtYW5kUmVnaXN0ZXIuYXNweCI+xJDEg25nIGvDvSBuZ3V54buHbiB24buNbmc8L2E+PC9saT48L3VsPjwvbGk+PGxpIGNsYXNzPSd0cmVldmlldyc+IDxhIGhyZWY9Ii9DTUNTT0ZULklVLldFQi5JTkZPL01hcmtBbmRWaWV3LmFzcHgiPjxzcGFuPlRyYSBj4bupdSDEkWnhu4NtIHThu5VuZyBo4bujcDwvc3Bhbj48L2E+PC9saT48bGkgY2xhc3M9J3RyZWV2aWV3Jz4gPGEgaHJlZj0iL0NNQ1NvZnQuSVUuV2ViLmluZm8vU3R1ZGVudE1hcmsuYXNweCI+PHNwYW4+VHJhIGPhu6l1IMSRaeG7g20gaOG7jWMgdOG6rXA8L3NwYW4+PC9hPjwvbGk+PGxpIGNsYXNzPSd0cmVldmlldyc+IDxhIGhyZWY9Ii9DTUNTb2Z0LklVLldlYi5JbmZvL1N0dWRlbnRTZXJ2aWNlL1ByYWN0aXNlTWFya0FuZFN0dWR5V2FybmluZy5hc3B4Ij48c3Bhbj5Sw6huIGx1eeG7h24sIGjhu41jIHbhu6UgdsOgIHThu5F0IG5naGnhu4dwPC9zcGFuPjwvYT48L2xpPjxsaSBjbGFzcz0ndHJlZXZpZXcnPiA8YSBocmVmPSIvQ01DU29mdC5JVS5XZWIuSW5mby9TdHVkZW50U2VydmljZS9TdHVkZW50VHVpdGlvbi5hc3B4Ij48c3Bhbj5UcmEgY+G7qXUgaOG7jWMgcGjDrTwvc3Bhbj48L2E+PC9saT48bGkgY2xhc3M9J3RyZWV2aWV3Jz4gPGEgaHJlZj0iL0NNQ1NvZnQuSVUuV2ViLkluZm8vQ291cnNlQnlGaWVsZFRyZWUuYXNweCI+PHNwYW4+Q2jGsMahbmcgdHLDrG5oIMSRw6BvIHThuqFvPC9zcGFuPjwvYT48L2xpPjxsaSBjbGFzcz0ndHJlZXZpZXcnPiA8YSBocmVmPSIvQ01DU29mdC5JVS5XZWIuaW5mby9DaGFuZ2VQYXNzV29yZFN0dWRlbnQuYXNweCI+PHNwYW4+xJDhu5VpIG3huq10IGto4bqpdTwvc3Bhbj48L2E+PC9saT48bGkgY2xhc3M9J3RyZWV2aWV3Jz4gPGEgaHJlZj0iL2NtY3NvZnQuaXUud2ViLmluZm8vU3R1ZGVudFZpZXdFeGFtTGlzdC5hc3B4Ij48c3Bhbj5YZW0gbOG7i2NoIHRoaSBjw6EgbmjDom48L3NwYW4+PC9hPjwvbGk+PC91bD5kAgwPEA8WBh8CBQhTZW1lc3Rlch8DBQJJZB8EZ2QQFRsLMV8yMDIwXzIwMjELMl8yMDE5XzIwMjALMV8yMDE5XzIwMjALMl8yMDE4XzIwMTkLMV8yMDE4XzIwMTkLMl8yMDE3XzIwMTgLMV8yMDE3XzIwMTgLMl8yMDE2XzIwMTcLMV8yMDE2XzIwMTcLMl8yMDE1XzIwMTYLMV8yMDE1XzIwMTYLMl8yMDE0XzIwMTULMV8yMDE0XzIwMTULMl8yMDEzXzIwMTQLMV8yMDEzXzIwMTQLMl8yMDEyXzIwMTMLMV8yMDEyXzIwMTMLMl8yMDExXzIwMTILMV8yMDExXzIwMTILMl8yMDEwXzIwMTELMV8yMDEwXzIwMTELMl8yMDA5XzIwMTALMV8yMDA5XzIwMTALMl8yMDA4XzIwMDkLMV8yMDA4XzIwMDkLMl8yMDA3XzIwMDgLMV8yMDA3XzIwMDgVGyAyMjBiODk3ZjNiYjg0NGViODc2Y2U3NmRhMGFkYTA2OSA1YWQwNjIyMzBjNWM0OTczYTFiZDI0MWVkODc2ZDZmYiBiZjI5OGI0NzIyYzg0MTM4YjRkZWEwZjQ5OGU4YmM1OSAzNDA1NDUxZmQ0ODI0NDZhOTZiYWFhZTQyMDYwYTY4OSA1ZmU3MTliZTcwMmU0NzJiOGIwMTk3YzE3ZGQ0ZDc3MCA2ODQ4MkVDNzVGQjk0NkQwODgzN0EyODk4QzVDNTg4NCA0YWExYmI2OTM0MDI0ODliYTk3YTEyZmViZjZhYzQ4ZSBlMGFiMjYyZjFjMGM0OGNkOWQ4NWMyYzgzM2FhYTU1YyA5NWRjYmE0MGI5MGI0M2QyOGFlY2M2NzNlY2Q0NzUyYiAzQjhERkNERTM2RDg0RTZEOEYxOUZCOEYyRkRFRTE0QyAzMjg0OTA1ZmZkMmE0MjI3YjMwNzhjOWY3NGE0ZDRjMSAyRTQ3OTk0Qjc3RTM0OTBDQUNCOTAwMEVEMTU4QTk0RiBlOGY4MjMwMzRlMWU0MmU4ODMwYzQwYjY2MWE5ODZkOSBBQjIwRDFBOTc1RTg0OTQwODgwOUFBNzcyRDdFM0QwQyBhNTM5YThiNjliYjk0YzU3OGVjMTZhZTQ1NjY4MTM3MyBBODc3ODNGMzczMzg0MDRDQTFBRUY2NTZCMDUxOTE4MiA3YjQyZDdkNDIxMzU0MzU0OTRiODc4ZDFiNTI4OTlhZCA4MDM3ZjM1MDc1NTE0OWIyYWZkM2YwYmExNTY2MWMwNyBjZDlmNzI1MDc1ZjM0NmQ1YjcyYTg5Y2I2ZjM0ZGY0ZiBCQ0NFRUUxNzQ1MEQ0NjUxQTE2RTFGNEFDOENBNUMxMiA1YWI0ZTI0MzlmODk0Zjc2OGEzZmEwMWUwYWU1OGM4MyBlY2I2MWI0OTcxODI0ZmRmOWJmZDNlNzNjMDIxZjFhYSBiNDhmNjI4YmI3ZmU0OTA4YmRhNzFkYzJiZmUzNzM4OCA1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ZAJJD2QWCGYPDxYCHwAFDDAyNC4zODUyMTQ0MWRkAgEPZBYCZg8PFgIfAWhkZAICD2QWAmYPDxYEHwAFBlRob8OhdB8BaGRkAgMPDxYCHwAFzwU8YSBocmVmPSIjIiBvbmNsaWNrPSJqYXZhc2NyaXB0OndpbmRvdy5wcmludCgpIj48ZGl2IHN0eWxlPSJGTE9BVDpsZWZ0Ij4JPGltZyBzcmM9Ii9DTUNTb2Z0LklVLldlYi5JbmZvL2ltYWdlcy9wcmludC5wbmciIGJvcmRlcj0iMCI+PC9kaXY+PGRpdiBzdHlsZT0iRkxPQVQ6bGVmdDtQQURESU5HLVRPUDo2cHgiPkluIHRyYW5nIG7DoHk8L2Rpdj48L2E+PGEgaHJlZj0ibWFpbHRvOj9zdWJqZWN0PUhlIHRob25nIHRob25nIHRpbiBJVSZhbXA7Ym9keT1odHRwOi8vZGFuZ2t5LnRsdS5lZHUudm4vQ01DU29mdC5JVS5XZWIuSW5mby9SZXBvcnRzL0Zvcm0vU3R1ZGVudFRpbWVUYWJsZS5hc3B4Ij48ZGl2IHN0eWxlPSJGTE9BVDpsZWZ0Ij48aW1nIHNyYz0iL0NNQ1NvZnQuSVUuV2ViLkluZm8vaW1hZ2VzL3NlbmRlbWFpbC5wbmciICBib3JkZXI9IjAiPjwvZGl2PjxkaXYgc3R5bGU9IkZMT0FUOmxlZnQ7UEFERElORy1UT1A6NnB4Ij5H4butaSBlbWFpbCB0cmFuZyBuw6B5PC9kaXY+PC9hPjxhIGhyZWY9IiMiIG9uY2xpY2s9ImphdmFzY3JpcHQ6YWRkZmF2KCkiPjxkaXYgc3R5bGU9IkZMT0FUOmxlZnQiPjxpbWcgc3JjPSIvQ01DU29mdC5JVS5XZWIuSW5mby9pbWFnZXMvYWRkdG9mYXZvcml0ZXMucG5nIiAgYm9yZGVyPSIwIj48L2Rpdj48ZGl2IHN0eWxlPSJGTE9BVDpsZWZ0O1BBRERJTkctVE9QOjZweCI+VGjDqm0gdsOgbyDGsGEgdGjDrWNoPC9kaXY+PC9hPmRkZNWPX0cEiec3Fjfm+z60hdP4JTqRrsTvwCMGLXWnlskd">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A0622FE5">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAFavm9yxlZb7qbtXbGxnWvblb8csnTIorMPSfpUKU79Fa8zr1tijm/dVbgMI0MJ/5MhJxi/pyypRM6i+Ay0tyJXpHW/isUyw6w8trNAGHDe5T/w2lIs9E7eeV2CwsZKam8yG9tEt/TDyJa1fzAdIcnRuq940A0sVd2nflhG7GplI5+8XeUh3gRTV1fmhPau35QRJEm+/71JNhmPUTYDle8ZO7TFUfuayrl2bG1x4vP8V54TyUfJH0FlNJdsjU+SfhUKFrhSym0kpHdm3aCioRhHRrFz7X5A42bQsMkJUVcrLSXUals9EQIVT4Vt1R2RjkROSGh/ELDAQiaS6T50iYENaAzk9/Geq/sZ1KX6XFCkRS44y60/oE5uSLvWsRgLhnjNhQvKmsy75GEzFEYmNq2/iQc35Hltk4PvMuMIHHlQ0tJbosCYu6/9rByw74uMzxNrrfXccQwymcDOo6uDm0AChYF/s32XUp730vb66Z3UPK09QEm7Br10Kdpp9zVr2HD/fcNpATQjkTQGC6O3p7uQAnnOB8+1TN12OqHVW4+d21vYLQldpo0WlnpvFOln321M18UkHKEulXwtAzgDJ7P8wRsL+UkwV30r4Ps+OUUVf63EpHOPNdnsbTTPvtG2LUSevhB3CTxvO1QKtGNjN1Ei/4X8C8PuLuSE41Ubm5XoyWP3ZXtFnpNG5xXzmu9m2/8sDzpMzsnfHoMKXR+quG2FTKpIfjgv9t9HrKfZMt+m0MAZUgidnen0rtIRR2U+izgjPX8NVc8o5AzUkW6rx9C2qkNR5I3cGvZSFIHpMebZ75gMEYFjANUUE0FzGlBwEbwLdY2RVuKY+RsZTEykD4prdWcm1AXsQKwELQQHR+HzShR00HoZWsYIOJdy0kIb/ha9OoFYGBLuwYLUC7fRFpDkMRfRkxiAdhHjSpoo9EiNqGRzqAy9mzO4eRO9tmdX+AOmhXdwedMRtjEkwMRERRfLa4O6Dcre4aeWV+mEzVuXJcuF7gKJV61Lfrm36r1Hvy1kqnlZ4lHGzXC/AkArxwcc4RWqMDlYgtCimcY6dcwMnTxb1gr3l/Js8zwiiia0zg8NyPyBhbHismGnStK0wEuMVhKeIa91xirYo4z0DsK4P0qAp69YzfQfcO/Oudp8GofsK+a0kU/Aut3Ztpw5yu5NL8q17YyrNeSSBueLyFv6EHiEViRAZVjwEnURcEuZXhJpt2fskQ8Pr8dJAusLWaNv5TTSU2gFdhUDvE0V7MYqBZFbffkBC6cdPR1wIypQV9bVDdnqFTWd9VddHmeUMv5uo/vhCyiaQJyvmpq37xyq0L/donmu4HLHhM6vfj2yKHfEdRv0W6jo/2pr3hHTpucxjp68JyG36llXJXQhzTDs0AH4vupOzk0lkmj6auLolpNJwzGL/84LP5nmY4Whj6i0bd35OcDyJUMOWUqtE15SJOtj/k5FcHkMmGlxA52K+Sba3T2JsLCkAg/HQm1Xzn5c96j1DFJwuPBalDwDViVsHMfiMTZJQPiz+KQtXXcwptCRKXm3XhFQLxFSz0cGbIcskIhzAoGZPTQXL+UawAdRqOXTL/WZMM6k2AoRCj6i0wTPS4i0yr4VuPXQcphLUg/BObWY0FgCqMPJvilc8zUnQhacX23vL9Y+10bhu3VvMRCizUlxfEqJUrU03FTtSqh/lh1I303i5Iru9PEXv2mO93/NkNDUKFaaRFASh0Ssc7a/k9C+S22gH6cBFgiPuyGy3I7/ZboXgCQ8Gz+Eb7vUtYJ7QClToIvGluZt4u5AeblsxLbX5+Fh1tfseMY5FrBAyql02kqS3C2QVRhLvUPMa/rEfDCmiXpeZ8YrxctON8TXm0HGskVWlf9LIN/J505gj">
+</div>
+			
+<style>
+	.notify { BORDER-BOTTOM: #336699 1px solid; POSITION: fixed; MIN-WIDTH: 300px; BORDER-LEFT: #336699 1px solid; PADDING-BOTTOM: 8px; BACKGROUND-COLOR: #ffd700; MIN-HEIGHT: 100px; PADDING-LEFT: 8px; BOTTOM: 10px; PADDING-RIGHT: 8px; COLOR: red; BORDER-TOP: #336699 1px solid; RIGHT: 10px; BORDER-RIGHT: #336699 1px solid; PADDING-TOP: 8px; z-index:99999 }
+	.notifimg { POSITION: fixed; BOTTOM: 10px; RIGHT: 10px; z-index:99999 }
+</style>
+
+<div id="headerright">
+	<div id="header">
+		<div style="POSITION: absolute;FONT-FAMILY: -webkit-body;COLOR: white;FONT-SIZE: 18px;TOP: 32px;FONT-WEIGHT: bold;LEFT: 8px">
+			<span id="PageHeader1_lblWebtitle">HỆ THỐNG ĐĂNG KÝ HỌC - ĐẠI HỌC THỦY LỢI</span></div>
+		<span id="navbar"><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Home.aspx">Trang chủ</a> |
+			<a id="PageHeader1_SignOut_ibnLogout" href="javascript:__doPostBack(&#39;PageHeader1$SignOut$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+
+			| <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/support/default.aspx" target="_blank">Hỏi đáp</a> | <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm" target="_blank">
+				Trợ giúp</a>
+			<select name="PageHeader1$drpNgonNgu" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;PageHeader1$drpNgonNgu\&#39;,\&#39;\&#39;)&#39;, 0)" id="PageHeader1_drpNgonNgu" style="width:50px;Z-INDEX: 0">
+	<option selected="selected" value="2D8E12D246D64A7BB3B89CC6484D2776">VN</option>
+
+</select>
+		</span>
+		<div id="box_size"><!--
+			<a href="javascript:decreaseFontSize();">
+				<h4 id="decreaseFontSize"></h4>
+			</a><a href="javascript:increaseFontSize();">
+				<h4 id="increaseFontSize"></h4>
+			</a>
+		--><span id="ur" style="FONT-SIZE: 14px; FONT-WEIGHT: bold"></span></div>
+		<div id="box_user">
+			<div style="WIDTH: 5px; DISPLAY: none; FLOAT: left; HEIGHT: 40px; PADDING-TOP: 2px">
+				<img id="PageHeader1_imgUser" src="./StudentTimeTable_files/UserInfo.gif" style="border-width:0px;DISPLAY: block; FLOAT: left"></div>
+			<div id="PageHeader1_Panel1" style="width:400px;TEXT-ALIGN: right; MARGIN-TOP: 2px">
+	
+				<p>
+					<span id="PageHeader1_lblUserFullName" style="color:Blue;font-size:10px;font-weight:bold;">Vũ Chí Công(1651060845)</span>
+					<span id="PageHeader1_lblRoleTitle">Vai trò:</span>
+					<span id="PageHeader1_lblUserRole" style="color:Blue;font-size:10px;">Sinh viên</span>
+					
+					<a id="PageHeader1_lbNewmessage" href="javascript:__doPostBack(&#39;PageHeader1$lbNewmessage&#39;,&#39;&#39;)" style="color:Blue;background-color:Transparent;FONT-SIZE: 10px">Hộp tin nhắn</a></p>
+			
+</div></div>
+		<div id="datetime" style="DISPLAY: none">[
+			<span id="PageHeader1_lblDatetime" style="font-weight:bold;">Datetime</span>]</div>
+		<div id="navigator">
+			<span id="PageHeader1_lblNavi">Đăng ký học <span style="font-size:10px">&gt;</span> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx">Kết quả đăng ký học</a></span></div>
+	</div>
+</div>
+<input name="PageHeader1$hidisNotify" type="hidden" id="PageHeader1_hidisNotify" value="1">
+<input name="PageHeader1$hidValueNotify" type="hidden" id="PageHeader1_hidValueNotify" value="0Nhấn &lt;a href=http://emsv.com.vn&gt;ở đây&lt;/a&gt; Tải ngay phiên bản di dộng Cổng thông tin Truờng&lt;br&gt;">
+<div class="notify" id="notify" style="">0Nhấn <a href="http://emsv.com.vn/">ở đây</a> Tải ngay phiên bản di dộng Cổng thông tin Truờng<br></div>
+<img class="notifimg" id="notifimg" src="./StudentTimeTable_files/new_icon.gif" style="">
+<script type="text/javascript">
+			checkNotify();
+			function checkNotify()
+			{
+				var isNotify = "0";
+				isNotify = document.getElementById("PageHeader1_hidisNotify").value;
+				if (isNotify=="1")
+				{						
+					try {
+						//viet ham kiem tra
+						if(document.getElementById("PageHeader1_hidValueNotify") != undefined)
+						{
+							var hidValue = document.getElementById("PageHeader1_hidValueNotify").value;
+							if (hidValue == null)
+							{
+								hidValue = "";
+							}				
+							document.getElementById("notify").style.display = "";
+							document.getElementById("notifimg").style.display = "";
+							document.getElementById("notify").innerHTML = hidValue;
+						}
+					}
+					catch(err) {
+						document.getElementById("demo").innerHTML = err.message;
+					}
+					
+				}
+			}
+</script>
+
+			<table id="Table3" border="0" cellspacing="0" cellpadding="0" width="100%">
+				<tbody><tr>
+					<td height="100%" valign="top" rowspan="2" width="90%">
+						<table id="Table9" cellspacing="0" cellpadding="0" width="100%" height="100%">
+							<tbody><tr>
+								<td align="center">
+</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				<tr>
+					<td><a id="GoHome1_ibnGoHome" href="javascript:__doPostBack(&#39;GoHome1$ibnGoHome&#39;,&#39;&#39;)" style="color:White;">Trang chủ</a>
+</td>
+					<td><a id="Signout2_ibnLogout" href="javascript:__doPostBack(&#39;Signout2$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+</td>
+				</tr>
+			</tbody></table>
+			<table id="Table6" border="0" cellspacing="0" cellpadding="0" width="100%" height="90%">
+				<tbody><tr>
+					<td height="100%" valign="top" width="170">
+
+<!-- Bootstrap 3.3.4
+    <link href="Includes/menu/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
+
+    <link href="./StudentTimeTable_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="./StudentTimeTable_files/ionicons.min.css" rel="stylesheet" type="text/css">    
+
+    <link href="./StudentTimeTable_files/AdminLTE.min.css" rel="stylesheet" type="text/css">
+
+    <link href="./StudentTimeTable_files/_all-skins.min.css" rel="stylesheet" type="text/css">
+      
+
+
+
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<!-- jQuery 2.1.4 -->
+    <script src="./StudentTimeTable_files/jQuery-2.1.4.min.js"></script>
+    <!-- jQuery UI 1.11.2 -->
+    <script src="./StudentTimeTable_files/jquery-ui.min.js" type="text/javascript"></script>
+    
+    
+    
+    <!-- AdminLTE App -->
+    <script src="./StudentTimeTable_files/app.min.js" type="text/javascript"></script>   
+<div class="skin-green-light sidebar-mini">
+<div id="Menu1_div_nav_menu" class="sidebar"><ul class="sidebar-menu"><li class="header">DANH MỤC CHÍNH</li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Profile/LinkUni.aspx"><span>Cổng Kết bạn Sinh viên, Siêu tiện ích!</span></a></li><li> <a><i class="fa fa-laptop"></i><span>Đăng ký học</span><i class="fa fa-angle-left pull-right"></i></a><ul class="treeview-menu"><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudyRegister/StudyRegister.aspx">Sinh viên đăng ký học</a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx">Kết quả đăng ký học</a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudyRegister/RegistrationHistory.aspx">Quá trình đăng ký học</a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudyRegister/DemandRegister.aspx">Đăng ký nguyện vọng</a></li></ul></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSOFT.IU.WEB.INFO/MarkAndView.aspx"><span>Tra cứu điểm tổng hợp</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/StudentMark.aspx"><span>Tra cứu điểm học tập</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/PractiseMarkAndStudyWarning.aspx"><span>Rèn luyện, học vụ và tốt nghiệp</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx"><span>Tra cứu học phí</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/CourseByFieldTree.aspx"><span>Chương trình đào tạo</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.info/ChangePassWordStudent.aspx"><span>Đổi mật khẩu</span></a></li><li class="treeview"> <a href="http://dangky.tlu.edu.vn/cmcsoft.iu.web.info/StudentViewExamList.aspx"><span>Xem lịch thi cá nhân</span></a></li></ul></div>
+</div>
+<div id="Menu1_div_nav" class="mymenu"></div>
+	<div class="clear"></div>
+<ul id="menusetting">
+	<li>
+	</li>
+	<li>
+	
+	</li>
+	<li>
+	
+	</li>
+		
+</ul></td>
+					<td height="100%" width="5"></td>
+					<td height="100%" valign="top"><br>
+						<table id="Table4" class="tableborder" border="0" cellspacing="1" cellpadding="0" width="100%" height="95%">
+							<tbody><tr>
+								<td valign="top">
+									<table id="Table1" border="0" cellspacing="1" cellpadding="0" width="100%">
+										<tbody><tr>
+											<td class="labelcontent" colspan="2">Học kỳ :
+												<select name="drpSemester" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;drpSemester\&#39;,\&#39;\&#39;)&#39;, 0)" id="drpSemester">
+	<option value="220b897f3bb844eb876ce76da0ada069">1_2020_2021</option>
+	<option selected="selected" value="5ad062230c5c4973a1bd241ed876d6fb">2_2019_2020</option>
+	<option value="bf298b4722c84138b4dea0f498e8bc59">1_2019_2020</option>
+	<option value="3405451fd482446a96baaae42060a689">2_2018_2019</option>
+	<option value="5fe719be702e472b8b0197c17dd4d770">1_2018_2019</option>
+	<option value="68482EC75FB946D08837A2898C5C5884">2_2017_2018</option>
+	<option value="4aa1bb693402489ba97a12febf6ac48e">1_2017_2018</option>
+	<option value="e0ab262f1c0c48cd9d85c2c833aaa55c">2_2016_2017</option>
+	<option value="95dcba40b90b43d28aecc673ecd4752b">1_2016_2017</option>
+	<option value="3B8DFCDE36D84E6D8F19FB8F2FDEE14C">2_2015_2016</option>
+	<option value="3284905ffd2a4227b3078c9f74a4d4c1">1_2015_2016</option>
+	<option value="2E47994B77E3490CACB9000ED158A94F">2_2014_2015</option>
+	<option value="e8f823034e1e42e8830c40b661a986d9">1_2014_2015</option>
+	<option value="AB20D1A975E849408809AA772D7E3D0C">2_2013_2014</option>
+	<option value="a539a8b69bb94c578ec16ae456681373">1_2013_2014</option>
+	<option value="A87783F37338404CA1AEF656B0519182">2_2012_2013</option>
+	<option value="7b42d7d42135435494b878d1b52899ad">1_2012_2013</option>
+	<option value="8037f350755149b2afd3f0ba15661c07">2_2011_2012</option>
+	<option value="cd9f725075f346d5b72a89cb6f34df4f">1_2011_2012</option>
+	<option value="BCCEEE17450D4651A16E1F4AC8CA5C12">2_2010_2011</option>
+	<option value="5ab4e2439f894f768a3fa01e0ae58c83">1_2010_2011</option>
+	<option value="ecb61b4971824fdf9bfd3e73c021f1aa">2_2009_2010</option>
+	<option value="b48f628bb7fe4908bda71dc2bfe37388">1_2009_2010</option>
+	<option value="57F1315123A24639BDC81EC128443F5E">2_2008_2009</option>
+	<option value="00100ad449664e8a887935220a6adf2a">1_2008_2009</option>
+	<option value="260e7535d0bf48eb8bb7d47975f7b0ea">2_2007_2008</option>
+	<option value="9e923717435a45a4bd10a9613cf0bad5">1_2007_2008</option>
+
+</select>&nbsp;<span class="labelcontent">Ðợt 
+													học :</span>
+												<select name="drpTerm" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;drpTerm\&#39;,\&#39;\&#39;)&#39;, 0)" id="drpTerm">
+	<option selected="selected" value="1">1</option>
+
+</select><input name="hidDiscountFactor" type="hidden" id="hidDiscountFactor" style="WIDTH: 32px; HEIGHT: 19px" size="1"><input name="hidReduceTuitionType" type="hidden" id="hidReduceTuitionType" style="WIDTH: 32px; HEIGHT: 19px" size="1"><input name="hidXetHeSoHocPhiTheoDoiTuong" type="hidden" id="hidXetHeSoHocPhiTheoDoiTuong" style="WIDTH: 32px; HEIGHT: 19px" size="1" value="N1"><input name="hidTuitionFactorMode" type="hidden" id="hidTuitionFactorMode" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="2"><input name="hidLoaiUuTienHeSoHocPhi" type="hidden" id="hidLoaiUuTienHeSoHocPhi" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="1"><input name="hidSecondFieldId" type="hidden" id="hidSecondFieldId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSecondAyId" type="hidden" id="hidSecondAyId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSecondFacultyId" type="hidden" id="hidSecondFacultyId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSecondAdminClassId" type="hidden" id="hidSecondAdminClassId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSecondFieldLevel" type="hidden" id="hidSecondFieldLevel" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidXetHeSoHocPhiDoiTuongTheoNganh" type="hidden" id="hidXetHeSoHocPhiDoiTuongTheoNganh" style="WIDTH: 32px; HEIGHT: 19px" size="1"><input name="hidUnitPriceDetail" type="hidden" id="hidUnitPriceDetail" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="1"><input name="hidFacultyId" type="hidden" id="hidFacultyId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="C80E3A834EE248119A6E7FE7477D0767"><input name="hidFieldLevel" type="hidden" id="hidFieldLevel" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="FI"><input name="hidPrintLocationByCode" type="hidden" id="hidPrintLocationByCode" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="0"><input name="hidUnitPriceKP" type="hidden" id="hidUnitPriceKP" style="WIDTH: 28px; HEIGHT: 19px" size="1"></td>
+										</tr>
+										<tr>
+											<td style="WIDTH: 118px" class="labelcontent">Kiểu thời&nbsp;khóa biểu&nbsp;:</td>
+											<td><select name="drpType" id="drpType">
+	<option selected="selected" value="A">Hiển thị theo học phần</option>
+	<option value="B">Hiển thị theo ngày học</option>
+	<option value="C">Hiển thị theo học phần,Thời khóa biểu</option>
+	<option value="D">Phiếu xác nhận đăng ký</option>
+	<option value="E">Hiển thị theo thứ học</option>
+	<option value="F">Hiển thị theo thứ học chiều nganh</option>
+	<option value="G">Hiển thị theo học phần,Thời khóa biểu-PDK</option>
+	<option value="H">Thời khóa biểu tuần</option>
+	<option value="I">Thời khóa biểu thứ theo chiều dọc</option>
+	<option value="J">Thời khóa biểu tuần &amp; thứ</option>
+
+</select><input type="submit" name="btnView" value="Xuất file Excel" id="btnView"><input name="hidStudentId" type="hidden" id="hidStudentId" style="WIDTH: 24px; HEIGHT: 19px" size="1" value="181721fbdf174ed8b8ee23c28c1c3d09"><input name="hidAcademicYearId" type="hidden" id="hidAcademicYearId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="F732C737EB6E49A8824BC5725BC035E6"><input name="hidFieldId" type="hidden" id="hidFieldId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="2B954C3BA18A46EF9856404437CE0ADE"><input name="hidSemester" type="hidden" id="hidSemester" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidTerm" type="hidden" id="hidTerm" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidShowTeacher" type="hidden" id="hidShowTeacher" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidUnitPrice" type="hidden" id="hidUnitPrice" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidTuitionCalculating" type="hidden" id="hidTuitionCalculating" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="1"><input name="hidTrainingSystemId" type="hidden" id="hidTrainingSystemId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="dda1424e45dd4676ad5fb25d33a31b43"><input name="hidAdminClassId" type="hidden" id="hidAdminClassId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="2A6959DF30AE4DF391C27677BC6724EB"><input name="hidTuitionStudentType" type="hidden" id="hidTuitionStudentType" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="1"><input name="hidStudentTypeId" type="hidden" id="hidStudentTypeId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidUntuitionStudentTypeId" type="hidden" id="hidUntuitionStudentTypeId" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidUniversityCode" type="hidden" id="hidUniversityCode" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="THUYLOI"></td>
+										</tr>
+									</tbody></table>
+									<table id="Table11" border="0" cellspacing="0" cellpadding="0" width="100%">
+										<tbody><tr>
+											<td class="listtitle" height="30" align="center"><span id="lblStudent">1651060845 - Vũ Chí Công - Ngành Công nghệ thông tin</span>
+												
+												
+												
+												</td>
+										</tr>
+										<tr>
+											<td class="listtitle" height="25" align="center">Kết qủa đăng ký học
+												<span id="lblSemester">Học kỳ 2 Năm học 2019_2020 Đợt học 1</span><input name="hidTuanBatDauHK2" type="hidden" id="hidTuanBatDauHK2" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSoTietSang" type="hidden" id="hidSoTietSang" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSoTietChieu" type="hidden" id="hidSoTietChieu" style="WIDTH: 28px; HEIGHT: 19px" size="1"><input name="hidSoTietToi" type="hidden" id="hidSoTietToi" style="WIDTH: 28px; HEIGHT: 19px" size="1"></td>
+										</tr>
+									</tbody></table>
+									<table id="Table2" border="0" cellspacing="1" cellpadding="0" width="100%" height="90%">
+										<tbody><tr>
+											<td class="tableborder">
+												<div style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 87%"><table cellspacing="0" cellpadding="0" rules="all" id="gridRegistered" style="border-color:RosyBrown;border-width:1px;border-style:Solid;width:100%;border-collapse:collapse;">
+	<tbody><tr class="DataGridFixedHeader" align="center" style="height:20px;">
+		<td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:4%;">STT</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:25%;">
+																	<label><b>Lớp học phần</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:9%;">
+																	<label><b>Học phần</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;">
+																	<label><b>Thời gian</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:10%;">
+																	<label><b>Ðịa điểm</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:4%;">
+																	<label><b>Sĩ số</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:4%;">
+																	<label><b>Số ÐK</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:4%;">
+																	<label><b>Số TC</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:8%;">
+																	<label><b>
+																			Học phí
+																		</b></label>
+																</td><td class="cssListHeader" align="center" style="color:White;font-weight:bold;height:20px;width:7%;">
+																	<label><b>Ghi chú</b></label>
+																</td>
+	</tr><tr class="cssListItem" style="height:20px;">
+		<td align="center">1</td><td style="font-weight:bold;">
+																	Chuyên đề 2-2-19 (58TH3.01)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_0">CSE409</span>
+																</td><td>
+																	Từ 11/05/2020 đến 07/06/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 3 tiết 4,5,6 (LT)</b><br>
+																	
+																</td><td>
+																	 243 A3
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	68
+																</td><td align="center">
+																	2
+																</td><td align="right">
+																	610.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListAlternativeItem" style="height:20px;">
+		<td align="center">2</td><td style="font-weight:bold;">
+																	Đường lối cách mạng của Đảng Cộng sản Việt Nam-2-19 (60TH5)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_1">IDEO234</span>
+																</td><td>
+																	Từ 16/03/2020 đến 10/05/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 2 tiết 1,2,3 (LT)</b><br>&nbsp;&nbsp;&nbsp;<b>Thứ 4 tiết 1,2,3 (LT)</b><br>
+																	
+																</td><td>
+																	 304 B5
+																</td><td align="center">
+																	75
+																</td><td align="center">
+																	77
+																</td><td align="center">
+																	3
+																</td><td align="right">
+																	915.000
+																</td><td align="right">
+																	Học lại
+																</td>
+	</tr><tr class="cssListItem" style="height:20px;">
+		<td align="center">3</td><td style="font-weight:bold;">
+																	Khai phá dữ liệu-2-19 (58TH3.01)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_2">CSE404</span>
+																</td><td>
+																	Từ 16/03/2020 đến 24/05/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 3 tiết 1,2,3 (LT)</b><br>
+																	
+																</td><td>
+																	 424 A4
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	3
+																</td><td align="right">
+																	915.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListAlternativeItem" style="height:20px;">
+		<td align="center">4</td><td style="font-weight:bold;">
+																	Khai phá dữ liệu-2-19 (58TH3.01.1)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_3">CSE404</span>
+																</td><td>
+																	Từ 06/04/2020 đến 07/06/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 5 tiết 1,2 (TH)</b><br>
+																	
+																</td><td>
+																	 302 C5
+																</td><td align="center">
+																	35
+																</td><td align="center">
+																	32
+																</td><td align="center">
+																	
+																</td><td align="right">
+																	
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListItem" style="height:20px;">
+		<td align="center">5</td><td style="font-weight:bold;">
+																	Mạng nơ ron và ứng dụng-2-19 (58TH2.01)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_4">CSE427</span>
+																</td><td>
+																	Từ 16/03/2020 đến 24/05/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 2 tiết 7,8,9 (LT)</b><br>
+																	
+																</td><td>
+																	 243 A3
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	60
+																</td><td align="center">
+																	3
+																</td><td align="right">
+																	915.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListAlternativeItem" style="height:20px;">
+		<td align="center">6</td><td style="font-weight:bold;">
+																	Mạng nơ ron và ứng dụng-2-19 (58TH2.01.2)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_5">CSE427</span>
+																</td><td>
+																	Từ 06/04/2020 đến 07/06/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 6 tiết 11,12 (TH)</b><br>
+																	
+																</td><td>
+																	 209 B5
+																</td><td align="center">
+																	35
+																</td><td align="center">
+																	23
+																</td><td align="center">
+																	
+																</td><td align="right">
+																	
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListItem" style="height:20px;">
+		<td align="center">7</td><td style="font-weight:bold;">
+																	Phân tích dữ liệu lớn-2-19 (58TH2.01)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_6">CSE406</span>
+																</td><td>
+																	Từ 16/03/2020 đến 24/05/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 4 tiết 7,8,9 (LT)</b><br>
+																	
+																</td><td>
+																	 243 A3
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	58
+																</td><td align="center">
+																	3
+																</td><td align="right">
+																	915.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListAlternativeItem" style="height:20px;">
+		<td align="center">8</td><td style="font-weight:bold;">
+																	Phân tích dữ liệu lớn-2-19 (58TH2.01.2)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_7">CSE406</span>
+																</td><td>
+																	Từ 06/04/2020 đến 07/06/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 6 tiết 9,10 (TH)</b><br>
+																	
+																</td><td>
+																	 208 B5
+																</td><td align="center">
+																	35
+																</td><td align="center">
+																	24
+																</td><td align="center">
+																	
+																</td><td align="right">
+																	
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListItem" style="height:20px;">
+		<td align="center">9</td><td style="font-weight:bold;">
+																	Thiết kế và phát triển game-2-19 (58TH3.01)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_8">CSE494</span>
+																</td><td>
+																	Từ 18/05/2020 đến 21/06/2020:<br>&nbsp;&nbsp;&nbsp;<b>Thứ 4 tiết 5,6 (LT)</b><br>&nbsp;&nbsp;&nbsp;<b>Thứ 6 tiết 5,6 (LT)</b><br>
+																	
+																</td><td>
+																	[T4] 245 A3<br>[T6] 339 A3
+																</td><td align="center">
+																	70
+																</td><td align="center">
+																	45
+																</td><td align="center">
+																	3
+																</td><td align="right">
+																	915.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr class="cssListAlternativeItem" style="height:20px;">
+		<td align="center">10</td><td style="font-weight:bold;">
+																	Thực tập tốt nghiệp công nghệ thông tin-2-19 (58TH3 + 58TH4)
+																</td><td>
+																	<span id="gridRegistered_lblCourseCode_9">CSE465</span>
+																</td><td>
+																	Từ 06/07/2020 đến 26/07/2020: (TT)<br>&nbsp;&nbsp;&nbsp;<b>(Thực tập)</b>
+																	
+																</td><td>
+																	
+																</td><td align="center">
+																	160
+																</td><td align="center">
+																	130
+																</td><td align="center">
+																	2
+																</td><td align="right">
+																	610.000
+																</td><td align="right">
+																	
+																</td>
+	</tr><tr align="center" style="height:20px;">
+		<td>&nbsp;</td><td align="center">
+																	<b>Tổng</b>
+																</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td align="center" style="font-weight:bold;">19</td><td align="right" style="font-weight:bold;">5795000</td><td align="right" style="font-weight:bold;">&nbsp;</td>
+	</tr>
+</tbody></table></div>
+											</td>
+										</tr>
+										<tr>
+											<td bgcolor="#003399" height="3"></td>
+										</tr>
+										<tr>
+											<td height="1"><span id="lblTermTuition" class="labelcontent"></span></td>
+										</tr>
+									</tbody></table>
+								</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			<span id="lblErrorInfo" style="color:Red;"></span>
+<script language="javascript">
+function addfav()
+   {
+   if (document.all)
+      {
+      window.external.AddFavorite
+      ("http://www.webdevelopersnotes.com","WebDevelopersNotes")
+      }
+   }
+
+</script>
+<div style="float:left;margin-top:60px;width:100%">
+<div id="footer_1" align="left">
+	<h4 id="hotline">Ðường dây nóng<br>
+		<span id="PageFooter1_lblHotline">024.38521441</span>
+	</h4>
+	<h4 style="FONT-SIZE:12px;right:11px;POSITION:absolute;TOP:20px">
+		<a id="PageFooter1_GoHome_ibnGoHome" href="javascript:__doPostBack(&#39;PageFooter1$GoHome$ibnGoHome&#39;,&#39;&#39;)" style="color:White;">Trang chủ</a>
+
+		|
+		<a id="PageFooter1_SignOut_ibnLogout" href="javascript:__doPostBack(&#39;PageFooter1$SignOut$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+
+		| <a style="COLOR:white" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/support/default.aspx" target="_blank">Hỏi đáp</a>
+		| <a style="COLOR:white" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm" target="_blank">Trợ giúp</a>
+	</h4>
+</div>
+<div id="footer_2"></div>
+<table align="center" bgcolor="white" style="PADDING-LEFT:5px;WIDTH:100%">
+	<tbody><tr>
+		<td align="right" width="533">
+			<span id="PageFooter1_lblEmail"><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx#" onclick="javascript:window.print()"><div style="FLOAT:left">	<img src="./StudentTimeTable_files/print.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">In trang này</div></a><a href="mailto:?subject=He%20thong%20thong%20tin%20IU&amp;body=http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx"><div style="FLOAT:left"><img src="./StudentTimeTable_files/sendemail.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">Gửi email trang này</div></a><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Reports/Form/StudentTimeTable.aspx#" onclick="javascript:addfav()"><div style="FLOAT:left"><img src="./StudentTimeTable_files/addtofavorites.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">Thêm vào ưa thích</div></a></span>
+		</td>
+		<td width="604">
+			<div style="FONT-WEIGHT:bold;FONT-SIZE:12px" align="left">
+				<span id="PageFooter1_lblCopyrightNotice"></span>
+				<span id="PageFooter1_lblLastUpdate"></span>
+				<span id="PageFooter1_lblVersion"></span>
+			</div>
+			
+		</td>
+		
+		<td align="right" width="410">
+			<p><a id="PageFooter1_hpUserOnlineList" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/UserOnlineList.aspx" target="_blank">Số người đang Online:</a>				
+				41
+			</p>
+			<p>Lượt truy cập:
+				906464
+			</p>
+		</td>
+	</tr>
+</tbody></table>
+
+</div>
+</form>
+	
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

@@ -1,0 +1,1107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0079)http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx -->
+<!--suppress ALL -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>.: Học phí sinh viên :.</title>
+		<meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+		<meta name="CODE_LANGUAGE" content="C#">
+		<meta name="vs_defaultClientScript" content="JavaScript">
+		<meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+		<meta content="progid:DXImageTransform.Microsoft.Fade(duration=.5)" http-equiv="Page-Exit">
+		<link rel="stylesheet" type="text/css" href="./__ Học phí sinh viên _._files/Default.css">
+		<script type="text/javascript" src="./__ Học phí sinh viên _._files/util.js"></script>
+	</head>
+	<body leftmargin="5" rightmargin="5" bgproperties="fixed" topmargin="0">
+		<form method="post" action="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx" id="Form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+
+</script>
+
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="EAD89EDB">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAzmAusqRWllGJqEbDT3qmtcb8csnTIorMPSfpUKU79Fa8zr1tijm/dVbgMI0MJ/5MhJxi/pyypRM6i+Ay0tyJXpHW/isUyw6w8trNAGHDe5T/w2lIs9E7eeV2CwsZKam8yG9tEt/TDyJa1fzAdIcnRuq940A0sVd2nflhG7GplI5+8XeUh3gRTV1fmhPau35QRwzGL/84LP5nmY4Whj6i0bMS21+fhYdbX7HjGORawQMqpdNpKktwtkFUYS71DzGv5BMJY2fCxFSJSw1UWjgENK3ecrFP9rU5E3lGx5/Tl9Qw==">
+</div>
+			
+<style>
+	.notify { BORDER-BOTTOM: #336699 1px solid; POSITION: fixed; MIN-WIDTH: 300px; BORDER-LEFT: #336699 1px solid; PADDING-BOTTOM: 8px; BACKGROUND-COLOR: #ffd700; MIN-HEIGHT: 100px; PADDING-LEFT: 8px; BOTTOM: 10px; PADDING-RIGHT: 8px; COLOR: red; BORDER-TOP: #336699 1px solid; RIGHT: 10px; BORDER-RIGHT: #336699 1px solid; PADDING-TOP: 8px; z-index:99999 }
+	.notifimg { POSITION: fixed; BOTTOM: 10px; RIGHT: 10px; z-index:99999 }
+</style>
+
+<div id="headerright">
+	<div id="header">
+		<div style="POSITION: absolute;FONT-FAMILY: -webkit-body;COLOR: white;FONT-SIZE: 18px;TOP: 32px;FONT-WEIGHT: bold;LEFT: 8px">
+			<span id="PageHeader1_lblWebtitle">HỆ THỐNG ĐĂNG KÝ HỌC - ĐẠI HỌC THỦY LỢI</span></div>
+		<span id="navbar"><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/Home.aspx">Trang chủ</a> |
+			<a id="PageHeader1_SignOut_ibnLogout" href="javascript:__doPostBack(&#39;PageHeader1$SignOut$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+
+			| <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/support/default.aspx" target="_blank">Hỏi đáp</a> | <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm" target="_blank">
+				Trợ giúp</a>
+			<select name="PageHeader1$drpNgonNgu" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;PageHeader1$drpNgonNgu\&#39;,\&#39;\&#39;)&#39;, 0)" id="PageHeader1_drpNgonNgu" style="width:50px;Z-INDEX: 0">
+	<option selected="selected" value="2D8E12D246D64A7BB3B89CC6484D2776">VN</option>
+
+</select>
+		</span>
+		<div id="box_size"><!--
+			<a href="javascript:decreaseFontSize();">
+				<h4 id="decreaseFontSize"></h4>
+			</a><a href="javascript:increaseFontSize();">
+				<h4 id="increaseFontSize"></h4>
+			</a>
+		--><span id="ur" style="FONT-SIZE: 14px; FONT-WEIGHT: bold"></span></div>
+		<div id="box_user">
+			<div style="WIDTH: 5px; DISPLAY: none; FLOAT: left; HEIGHT: 40px; PADDING-TOP: 2px">
+				<img id="PageHeader1_imgUser" src="./__ Học phí sinh viên _._files/UserInfo.gif" style="border-width:0px;DISPLAY: block; FLOAT: left"></div>
+			<div id="PageHeader1_Panel1" style="width:400px;TEXT-ALIGN: right; MARGIN-TOP: 2px">
+	
+				<p>
+					<span id="PageHeader1_lblUserFullName" style="color:Blue;font-size:10px;font-weight:bold;">Vũ Chí Công(1651060845)</span>
+					<span id="PageHeader1_lblRoleTitle">Vai trò:</span>
+					<span id="PageHeader1_lblUserRole" style="color:Blue;font-size:10px;">Sinh viên</span>
+					
+					<a id="PageHeader1_lbNewmessage" href="javascript:__doPostBack(&#39;PageHeader1$lbNewmessage&#39;,&#39;&#39;)" style="color:Blue;background-color:Transparent;FONT-SIZE: 10px">Hộp tin nhắn</a></p>
+			
+</div></div>
+		<div id="datetime" style="DISPLAY: none">[
+			<span id="PageHeader1_lblDatetime" style="font-weight:bold;">Datetime</span>]</div>
+		<div id="navigator">
+			<span id="PageHeader1_lblNavi"> <span style="font-size:10px">&gt;</span> <a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx">Tra cứu học phí</a></span></div>
+	</div>
+</div>
+<input name="PageHeader1$hidisNotify" type="hidden" id="PageHeader1_hidisNotify" value="1">
+<input name="PageHeader1$hidValueNotify" type="hidden" id="PageHeader1_hidValueNotify" value="0Nhấn &lt;a href=http://emsv.com.vn&gt;ở đây&lt;/a&gt; Tải ngay phiên bản di dộng Cổng thông tin Truờng&lt;br&gt;">
+<div class="notify" id="notify" style="">0Nhấn <a href="http://emsv.com.vn/">ở đây</a> Tải ngay phiên bản di dộng Cổng thông tin Truờng<br></div>
+<img class="notifimg" id="notifimg" src="./__ Học phí sinh viên _._files/new_icon.gif" style="">
+<script type="text/javascript">
+			checkNotify();
+			function checkNotify()
+			{
+				var isNotify = "0";
+				isNotify = document.getElementById("PageHeader1_hidisNotify").value;
+				if (isNotify=="1")
+				{						
+					try {
+						//viet ham kiem tra
+						if(document.getElementById("PageHeader1_hidValueNotify") != undefined)
+						{
+							var hidValue = document.getElementById("PageHeader1_hidValueNotify").value;
+							if (hidValue == null)
+							{
+								hidValue = "";
+							}				
+							document.getElementById("notify").style.display = "";
+							document.getElementById("notifimg").style.display = "";
+							document.getElementById("notify").innerHTML = hidValue;
+						}
+					}
+					catch(err) {
+						document.getElementById("demo").innerHTML = err.message;
+					}
+					
+				}
+			}
+</script>
+
+			<table id="Table3" border="0" cellspacing="0" cellpadding="0" width="100%">
+				<tbody><tr>
+					<td height="100%" valign="top" rowspan="2" width="90%">
+						<table id="Table9" cellspacing="0" cellpadding="0" width="100%" height="100%">
+							<tbody><tr>
+								<td align="center">
+</td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				<tr>
+					<td><a id="GoHome1_ibnGoHome" href="javascript:__doPostBack(&#39;GoHome1$ibnGoHome&#39;,&#39;&#39;)" style="color:White;">Trang chủ</a>
+</td>
+					<td><a id="Signout2_ibnLogout" href="javascript:__doPostBack(&#39;Signout2$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+</td>
+				</tr>
+			</tbody></table>
+			<table id="Table6" border="0" cellspacing="0" cellpadding="0" width="100%" height="78%">
+				<tbody><tr>
+					<td height="100%" valign="top"><br>
+						<table id="Table4" border="0" cellspacing="1" cellpadding="0" width="100%" height="100%">
+							<tbody>
+								<tr>
+									<td style="HEIGHT: 19px" height="19" align="center"><span id="lblStudent" class="listtitle">1651060845 - Vũ Chí Công - Lớp 58TH3 - Ngành Công nghệ thông tin - K58</span>
+                                        <span id="lblSoTaiKhoanNganHang" class="labelcontent" style="color:Red;">Số tài khoản ngân hàng: 100003570711</span>
+                                        <input name="hidStudentId" type="hidden" id="hidStudentId" style="WIDTH: 28px; HEIGHT: 19px" size="1" value="181721fbdf174ed8b8ee23c28c1c3d09">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+									</td>
+								</tr>
+								<tr>
+									<td style="HEIGHT: 19px" height="19" align="center"><span id="lblStudentAccount" class="listtitle">Phải đóng: <span style="color:green">40.300.000</span> Đã đóng: <span style="color:green">56.703.000</span> Đã rút: <span style="color:green">15.244.000</span> Còn dư: <span style="color:green">1.159.000</span></span></td>
+								</tr>
+								<tr>
+									<td class="tableborder" align="center">
+										<table border="0" cellspacing="1" cellpadding="0" width="100%" height="100%">
+											<tbody>
+												<tr>
+													<td height="100%" width="55%" align="center"><div id="pnlSholarship">
+	
+													</div><table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+															<tbody>
+																<tr>
+																	<td class="listtitle" height="25" align="center">Đã đóng&nbsp;<span id="lblPaidAmount">41.459.000</span></td>
+																</tr>
+																<tr>
+																	<td>
+																		<div style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: auto">
+																					<table width="100%" border="0" cellspacing="0" id="tblPaid">
+																						<colgroup><col align="center" width="7%">
+																						<col width="20%">
+																						<col>
+																						<col width="14%">
+																						<col width="16%" align="right">
+																						<col width="9%" align="center">
+																						</colgroup><tbody><tr class="DataGridFixedHeader" height="20">
+																							<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">STT</td>
+																							<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Loại</td>
+																							<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Nội 
+																								dung</td>
+																							<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Ngày</td>
+																							<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Số 
+																								tiền</td>
+																						</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							1
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Hoc phi chuyen tu phi ATM
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							05/09/2016
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							50.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							2
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Tạm thu
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							05/09/2016
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4.000.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							3
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2016_2017_2), đợt9
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							27/07/2017
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							460.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2016_2017_2), đợt1
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							08/09/2017
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4.460.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							5
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Rut HB chuyen sang HP
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							25/12/2017
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4.370.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							6
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Rut HB chuyen sang HP
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							25/03/2018
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							3.920.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							7
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Lệ phí thi
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2017_2018_2), đợt13
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							3/5/2018
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							100.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							8
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2017_2018_2), đợt1
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							31/5/2018
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							530.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							9
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2017_2018_2), đợt7
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							09/08/2018
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							1.715.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							10
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2018_2019_1), đợt1
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							17/12/2018
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4.400.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							11
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2018_2019_2), đợt7
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							25/07/2019
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							4.125.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							12
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2018_2019_2), đợt7
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							9/8/2019
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							275.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							13
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							THU TIỀN TỪ NGÂN HÀNG (2019_2020_1), đợt1
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							26/12/2019
+																						</td>
+																						<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							6.100.000
+																						</td>
+																					</tr>
+																				
+																					<tr height="20">
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							14
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Học phí
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							Chuyen Bong ky 1 sang hoc phi
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							28/04/2020
+																						</td>
+																						<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																							6.954.000
+																						</td>
+																					</tr>
+																				
+																					<tr>
+																						<td colspan="5" height="1" bgcolor="#003399"></td>
+																					</tr>
+														</tbody></table>
+														</div></td>
+												</tr>
+												<tr>
+														<td id="tdScholarship" height="30%" valign="top">
+															<div style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: auto" id="divScholarship">
+																		<table width="100%" border="0" cellspacing="0" id="tblPaid">
+																			<colgroup><col align="center" width="7%">
+																			<col>
+																			<col width="16%" align="right">
+																			</colgroup><tbody><tr class="DataGridFixedHeader" height="20">
+																				<td colspan="4" class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Học 
+																					bổng</td>
+																			</tr>
+																	
+																		<tr height="20">
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				1
+																			</td>
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				Học bổng Khuyến khích học tập học kỳ 2 năm học 2016-2017
+																			</td>
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				4.370.000
+																			</td>
+																		</tr>
+																	
+																		<tr height="20">
+																			<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				2
+																			</td>
+																			<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				Học bổng Khuyến khích học tập học kỳ 1 năm học 2017-2018
+																			</td>
+																			<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				3.920.000
+																			</td>
+																		</tr>
+																	
+																		<tr height="20">
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				3
+																			</td>
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				Học bổng Khuyến khích học tập học kỳ 1 năm học 2019-2020
+																			</td>
+																			<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																				6.954.000
+																			</td>
+																		</tr>
+																	
+																		<tr>
+																			<td colspan="4" height="1" bgcolor="#003399"></td>
+																		</tr>
+										</tbody></table>
+										</div></td>
+								</tr>
+								
+</tbody></table>
+					</td>
+					<td bgcolor="#336699" width="3"></td>
+					<td height="25" align="center">
+						<div id="pnlOut">
+	
+					</div><table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+							<tbody><tr>
+								<td>
+									<table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+										<tbody>
+											<tr>
+												<td class="listtitle" height="25" align="center">Còn phải&nbsp;đóng
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: auto">
+																<table width="100%" border="0" cellspacing="0" id="tblDueAmount">
+																	<colgroup><col align="center" width="8%">
+																	<col>
+																	<col width="18%">
+																	<col width="18%" align="right">
+																	<col width="18%" align="right">
+																	<col width="5%" align="center">
+																	</colgroup><tbody><tr class="DataGridFixedHeader" height="20">
+																		<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">STT</td>
+																		<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Loại</td>
+																		<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Học 
+																			kỳ</td>
+																		<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Số 
+																			tiền</td>
+																		<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Còn 
+																			phải đóng</td>
+																	</tr>
+															
+																<tr>
+																	<td colspan="6" height="1" bgcolor="#336699"></td>
+																</tr>
+									</tbody></table>
+									</div></td>
+							</tr>
+						</tbody></table>
+					</td>
+				</tr>				
+				<tr>
+						<td height="40%">
+							<table border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+								<tbody>
+									<tr>
+										<td class="listtitle" height="25" align="center">Đã rút&nbsp;
+											<span id="lblRutTien">15.244.000</span></td>
+									</tr>
+									<tr>
+										<td>
+											<div style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: auto" id="divOut">
+												
+														<table width="100%" border="0" cellspacing="0" id="tblPaid">
+															<colgroup><col align="center" width="7%">
+															<col>
+															<col width="14%">
+															<col width="16%" align="right">
+															<col width="9%" align="center">
+															</colgroup><tbody><tr class="DataGridFixedHeader" height="20">
+																<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">STT</td>
+																<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Nội 
+																	dung</td>
+																<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Ngày</td>
+																<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Số 
+																	tiền</td>
+															</tr>
+													
+														<tr height="20">
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																1
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																Rut HB chuyen sang HP
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																12/25/2017 12:00:00 AM
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																4.370.000
+															</td>
+														</tr>
+													
+														<tr height="20">
+															<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																2
+															</td>
+															<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																Rut HB chuyen sang HP
+															</td>
+															<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																3/25/2018 12:00:00 AM
+															</td>
+															<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																3.920.000
+															</td>
+														</tr>
+													
+														<tr height="20">
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																3
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																Chuyen Bong ky 1 sang hoc phi
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																4/28/2020 12:00:00 AM
+															</td>
+															<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																6.954.000
+															</td>
+														</tr>
+													
+														<tr>
+															<td colspan="5" height="1" bgcolor="#003399"></td>
+														</tr>
+							</tbody></table>
+							</div></td>
+					</tr>
+				            
+</tbody></table>
+			</td></tr></tbody></table></td></tr>
+			<tr>
+				<td colspan="3">
+					<table border="0" cellspacing="1" cellpadding="0" width="100%" height="100%">
+						<tbody><tr>
+							<td>
+								<table id="Table5" class="tableborder" border="0" cellspacing="1" cellpadding="0" width="100%" height="100%">
+									<tbody>
+										<tr>
+											<td class="listtitle" height="25" align="center">Dánh sách các khoản phải đóng
+												<span id="lblDueAmount" class="listtitle">(Tổng số : 40.300.000)</span></td>
+                                             <td class="listtitle" align="center" height="25">
+											</td>
+										</tr>
+										<tr>
+											<td align="right">
+												<div style="WIDTH: 100%; HEIGHT: 100%; OVERFLOW: auto">
+															<table width="100%" border="0" cellspacing="0" id="tblTotalDueAmount">
+																<colgroup><col align="center" width="5%">
+																<col>
+																<col width="10%">
+																<col width="7%" align="center">
+																<col width="7%" align="center">
+																<col width="14%" align="right">
+																<col width="10%" align="center">
+																<col width="10%" align="right">
+																<col width="14%" align="right">
+																</colgroup><tbody><tr class="DataGridFixedHeader" height="20">
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">STT</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Loại</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Học 
+																		kỳ</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Đợt</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Số 
+																		TC</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Số 
+																		tiền</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Miễn 
+																		giảm</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Học 
+																		lại</td>
+																	<td class="cssListHeader" align="center" style="BORDER-LEFT: RosyBrown 1px solid; ">Phải 
+																		đóng</td>
+																</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2016_2017_1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	18
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.140.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.140.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2016_2017_2
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	19
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.370.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.370.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	3
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2016_2017_2
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	9
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	460.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	460.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	460.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2017_2018_1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	17
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.165.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.165.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	5
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2017_2018_2
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	19
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.655.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.655.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	6
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2017_2018_2
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	7
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	7
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1.715.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1.715.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	7
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Lệ phí thi
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2017_2018_2
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	13
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	100.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	100.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	8
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2018_2019_1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	16
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.400.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.400.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	9
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2018_2019_2
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	15
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.125.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	4.125.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	10
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2018_2019_2
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	5
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	275.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	275.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	11
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2019_2020_1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	20
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	6.100.000
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	6.100.000
+																</td>
+															</tr>
+														
+															<tr height="20">
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	12
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	Học phí
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	2019_2020_2
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	1
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	19
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	5.795.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	0
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	915.000
+																</td>
+																<td class="cssListAlternativeItem" style="BORDER-LEFT: RosyBrown 1px solid; ">
+																	5.795.000
+																</td>
+															</tr>
+														
+															<tr>
+																<td colspan="9" height="1" bgcolor="#003399"></td>
+															</tr>
+								</tbody></table>
+								</div></td>
+                                            <td align="right">
+							<div id="Div1" style="WIDTH: 100%; HEIGHT: 100%">
+								</div></td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+			</tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<script language="javascript">
+function addfav()
+   {
+   if (document.all)
+      {
+      window.external.AddFavorite
+      ("http://www.webdevelopersnotes.com","WebDevelopersNotes")
+      }
+   }
+
+</script>
+<div style="float:left;margin-top:60px;width:100%">
+<div id="footer_1" align="left">
+	<h4 id="hotline">Ðường dây nóng<br>
+		<span id="PageFooter1_lblHotline">024.38521441</span>
+	</h4>
+	<h4 style="FONT-SIZE:12px;right:11px;POSITION:absolute;TOP:20px">
+		<a id="PageFooter1_GoHome_ibnGoHome" href="javascript:__doPostBack(&#39;PageFooter1$GoHome$ibnGoHome&#39;,&#39;&#39;)" style="color:White;">Trang chủ</a>
+
+		|
+		<a id="PageFooter1_SignOut_ibnLogout" href="javascript:__doPostBack(&#39;PageFooter1$SignOut$ibnLogout&#39;,&#39;&#39;)" style="color:White;">Thoát</a>
+
+		| <a style="COLOR:white" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/support/default.aspx" target="_blank">Hỏi đáp</a>
+		| <a style="COLOR:white" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/WebHelp/NewProject1.htm" target="_blank">Trợ giúp</a>
+	</h4>
+</div>
+<div id="footer_2"></div>
+<table align="center" bgcolor="white" style="PADDING-LEFT:5px;WIDTH:100%">
+	<tbody><tr>
+		<td align="right" width="533">
+			<span id="PageFooter1_lblEmail"><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx#" onclick="javascript:window.print()"><div style="FLOAT:left">	<img src="./__ Học phí sinh viên _._files/print.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">In trang này</div></a><a href="mailto:?subject=He%20thong%20thong%20tin%20IU&amp;body=http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx"><div style="FLOAT:left"><img src="./__ Học phí sinh viên _._files/sendemail.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">Gửi email trang này</div></a><a href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/StudentService/StudentTuition.aspx#" onclick="javascript:addfav()"><div style="FLOAT:left"><img src="./__ Học phí sinh viên _._files/addtofavorites.png" border="0"></div><div style="FLOAT:left;PADDING-TOP:6px">Thêm vào ưa thích</div></a></span>
+		</td>
+		<td width="604">
+			<div style="FONT-WEIGHT:bold;FONT-SIZE:12px" align="left">
+				<span id="PageFooter1_lblCopyrightNotice"></span>
+				<span id="PageFooter1_lblLastUpdate"></span>
+				<span id="PageFooter1_lblVersion"></span>
+			</div>
+			
+		</td>
+		
+		<td align="right" width="410">
+			<p><a id="PageFooter1_hpUserOnlineList" href="http://dangky.tlu.edu.vn/CMCSoft.IU.Web.Info/UserOnlineList.aspx" target="_blank">Số người đang Online:</a>				
+				27
+			</p>
+			<p>Lượt truy cập:
+				903797
+			</p>
+		</td>
+	</tr>
+</tbody></table>
+
+</div>
+</form>
+	
+
+</body></html>

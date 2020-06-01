@@ -13,3 +13,10 @@ data class Tuition(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
+
+data class TuitionInfo(
+    val id: Int,
+    val label: String,
+    val amount: String,
+    val info: Int
+)

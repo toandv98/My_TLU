@@ -14,14 +14,14 @@ sealed class SemesterType
 @Entity(
     tableName = "summary_semester",
     indices = [Index(value = ["year", "semester"])],
-    primaryKeys = ["year", "semester"],
-    foreignKeys = [ForeignKey(
-        entity = Semester::class,
-        parentColumns = ["year", "semester"],
-        childColumns = ["year", "semester"],
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
-    )]
+    primaryKeys = ["year", "semester"]//,
+//    foreignKeys = [ForeignKey(
+//        entity = Semester::class,
+//        parentColumns = ["year", "semester"],
+//        childColumns = ["year", "semester"],
+//        onDelete = ForeignKey.CASCADE,
+//        onUpdate = ForeignKey.CASCADE
+//    )]
 )
 data class SummarySemester(
     val year: String,
@@ -33,14 +33,14 @@ data class SummarySemester(
 @Entity(
     tableName = "practise_semester",
     indices = [Index(value = ["year", "semester"])],
-    primaryKeys = ["year", "semester"],
-    foreignKeys = [ForeignKey(
-        entity = Semester::class,
-        parentColumns = ["year", "semester"],
-        childColumns = ["year", "semester"],
-        onUpdate = ForeignKey.CASCADE,
-        onDelete = ForeignKey.CASCADE
-    )]
+    primaryKeys = ["year", "semester"]//,
+//    foreignKeys = [ForeignKey(
+//        entity = Semester::class,
+//        parentColumns = ["year", "semester"],
+//        childColumns = ["year", "semester"],
+//        onUpdate = ForeignKey.CASCADE,
+//        onDelete = ForeignKey.CASCADE
+//    )]
 )
 data class PractiseSemester(
     val year: String,

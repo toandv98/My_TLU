@@ -1,55 +1,56 @@
 package com.toandv.mytlu.local
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
-import com.toandv.mytlu.local.entity.*
+import androidx.room.*
+import com.toandv.mytlu.local.entity.PractiseSemester
+import com.toandv.mytlu.local.entity.Semester
+import com.toandv.mytlu.local.entity.SemesterInfo
+import com.toandv.mytlu.local.entity.SummarySemester
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
+@Dao
 abstract class SemesterDao {
     //endregion
     @Query("select * from summary_semester")
-    abstract fun getAllSummarySemester(): Flow<List<SummarySemester>>
+    abstract fun getAllSummarySemesterFlow(): Flow<List<SummarySemester>>
 
     @Query("select * from practise_semester")
-    abstract fun getAllPractiseSemester(): Flow<List<PractiseSemester>>
+    abstract fun getAllPractiseSemesterFlow(): Flow<List<PractiseSemester>>
 
     @Transaction
     @Query("select * from semester")
-    abstract fun getAllSemesterInfo(): Flow<List<SemesterInfo>>
+    abstract fun getAllSemesterInfoFlow(): Flow<List<SemesterInfo>>
 
     @Transaction
-    suspend fun replaceSemesterFlow(semester:Flow<Semester>, semesterType: Flow<SemesterType>) {
+    @Query("select * from semester inner join summary_semester on semester.year == summary_semester.year and semester.semester == summary_semester.semester inner join practise_semester on semester.year == practise_semester.year and semester.semester == practise_semester.semester")
+    abstract suspend fun getAllSemesterInfo(): List<SemesterInfo>
+
+    suspend fun replaceSemesterFlow(
+        semester: Array<Semester>,
+        summarySemester: Array<SummarySemester>,
+        practiseSemester: Array<PractiseSemester>
+    ) {
         // Cascaded (xóa bản ghi ở bảng chính thì xóa luôn ở bảng con)
         deleteAllSemester()
-        semester.collect {
-            insertSemester(it)
-        }
-        semesterType.collect {
-            when(it){
-                is SummarySemester -> insertSummarySemester(it)
-                is PractiseSemester -> insertPractiseSemester(it)
-            }
-        }
+        insertSemester(*semester)
+        insertSummarySemester(*summarySemester)
+        insertPractiseSemester(*practiseSemester)
     }
 
     @Query("delete from semester")
-    protected abstract suspend fun deleteAllSemester()
+    abstract suspend fun deleteAllSemester()
 
     @Insert(onConflict = OnConflictStrategy.ABORT, entity = Semester::class)
-    protected abstract suspend fun insertSemester(vararg semester: Semester)
+    abstract suspend fun insertSemester(vararg semester: Semester)
 
     @Query("delete from summary_semester")
     protected abstract suspend fun deleteAllSummarySemester()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract suspend fun insertSummarySemester(vararg summary: SummarySemester)
+    abstract suspend fun insertSummarySemester(vararg summary: SummarySemester)
 
     @Query("delete from practise_semester")
     protected abstract suspend fun deleteAllPractiseSemester()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    protected abstract suspend fun insertPractiseSemester(vararg practiseSemester: PractiseSemester)
+    abstract suspend fun insertPractiseSemester(vararg practiseSemester: PractiseSemester)
 }

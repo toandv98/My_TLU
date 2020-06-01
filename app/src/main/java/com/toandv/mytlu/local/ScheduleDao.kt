@@ -10,10 +10,6 @@ abstract class ScheduleDao {
     @Query("select * from schedule where status < 2 order by datetime")
     abstract fun getAll(): LiveData<List<Schedule>>
 
-    @Deprecated("Không nên dùng Deferred", ReplaceWith("suspend fun"), DeprecationLevel.WARNING)
-    @Query("select * from schedule where status < 2 order by datetime")
-    abstract suspend fun getAllAsync(): Deferred<List<Schedule>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insert(vararg schedules: Schedule)
 
@@ -21,7 +17,7 @@ abstract class ScheduleDao {
     abstract suspend fun deleteAll()
 
     @Transaction
-    suspend fun replaceSchedules(vararg schedules: Schedule){
+    open suspend fun replaceSchedules(vararg schedules: Schedule){
         deleteAll()
         insert(*schedules)
     }

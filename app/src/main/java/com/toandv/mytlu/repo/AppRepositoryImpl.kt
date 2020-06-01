@@ -1,14 +1,17 @@
 package com.toandv.mytlu.repo
 
+import android.content.res.Resources
 import com.toandv.mytlu.local.AppDatabase
-import com.toandv.mytlu.local.entity.ExamTimetable
-import com.toandv.mytlu.remote.JsoupService
+import com.toandv.mytlu.local.entity.SemesterType
+import com.toandv.mytlu.remote.*
 import kotlinx.coroutines.*
-import org.jsoup.nodes.Document
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 
 class AppRepositoryImpl constructor(
     private val database: AppDatabase,
     private val jsoupService: JsoupService,
+    private val resources: Resources,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AppRepository {
 
@@ -17,31 +20,31 @@ class AppRepositoryImpl constructor(
         return jsoupService.login(userName, password)
     }
 
+    @ExperimentalCoroutinesApi
     override suspend fun refresh() {
         //TODO login lai o day hoac check login
         coroutineScope {
             launch(ioDispatcher) {
-                val doc = jsoupService.getMarkDoc()
-                //TODO implement this @Toandv
-                ensureActive()
-//                database.sumMarkDao().insertSummarySemester()
+                // Default parameters Để lấy các học kỳ
+                val examTimetableDocDefault = async { jsoupService.getExamTimetableDoc() }
+                val markDoc = async { jsoupService.getMarkDoc() }
+                val practiseDoc = async { jsoupService.getPractiseDoc() }
+                val tuitionDoc = async { jsoupService.getTuitionDoc() }
+
+                // Thêm vào bảng semester và 2 bảng phụ summary_semester, practise_semester
+//                val semesterFlow = examTimetableDocDefault.await().parseSemesterFlow()
+//                ensureActive()
+//                flow<SemesterType> {
+//                    markDoc.await().parseSummarySemesterFlow().let { emitAll(it) }
+//                    practiseDoc.await().parsePractiseMarkFlow().let { emitAll(it) }
+//                }.let { database.semesterDao().replaceSemesterFlow(semesterFlow, it) }
+//
+//                // Thêm vào bảng student_tuition
+//                ensureActive()
+//                database.studentTuitionDao()
+//                    .replaceTuitionFlow(tuitionDoc.await().parseTuitionDataFlow(resources))
             }
             ensureActive()
-            launch(ioDispatcher) {
-                val doc = jsoupService.getPractiseDoc()
-                //TODO implement this @Toandv
-                ensureActive()
-                database.detailMarkDao()
-            }
-        }
-    }
-
-    @Deprecated("Không nên dùng Deferred", ReplaceWith("suspend fun"), DeprecationLevel.WARNING)
-    private suspend fun examTimeTablesData(document: Document): Deferred<List<ExamTimetable>> = withContext(ioDispatcher){
-        return@withContext async {
-            val examTimetables = mutableListOf<ExamTimetable>()
-
-            examTimetables
         }
     }
 }
