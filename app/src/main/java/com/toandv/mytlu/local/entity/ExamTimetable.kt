@@ -1,13 +1,40 @@
 package com.toandv.mytlu.local.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.ForeignKey
 import org.joda.time.LocalDateTime
 
-@Entity(tableName = "exam_timetables")
+/**
+ * @param semester học kỳ
+ * @param dot đợt
+ * @param code mã môn
+ * @param name tên
+ * @param st số tín
+ * @param dateTime ngày tháng
+ * @param time thời gian
+ * @param sbd số báo danh
+ * @param room phòng
+ */
+@Entity(
+    tableName = "exam_timetables",
+    primaryKeys = ["year", "semester", "dot", "code"],
+    foreignKeys = [ForeignKey(
+        entity = Semester::class,
+        parentColumns = ["year", "semester"],
+        childColumns = ["year", "semester"],
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE
+    )]
+)
 data class ExamTimetable(
+    @Embedded
+    val semester: Semester,
 
+    val dot: String,
+
+    @ColumnInfo(name = "ma_mon")
     val code: String,
 
     val name: String,
@@ -22,7 +49,4 @@ data class ExamTimetable(
     val sbd: String,
 
     val room: String
-) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
-}
+)

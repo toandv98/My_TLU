@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.Matchers.greaterThanOrEqualTo
+import org.jsoup.nodes.Document
 import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,11 +18,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 @ExperimentalCoroutinesApi
 class DocumentExtensionsKtTest {
+    val jsoupService = FakeJoupService()
 
     @Test
     fun parseExamTableDataFlow_trueDoc() = runBlockingTest {
         // GIVEN
-        val trueDoc = DummyDocument.getStudentViewExamList_aspx_html()
+        val trueDoc = jsoupService.getExamTimetableDoc()
 
         // WHEN
         val count = trueDoc.parseExamTableDataFlow().count()
@@ -32,7 +35,7 @@ class DocumentExtensionsKtTest {
     @Test(expected = IllegalArgumentException::class)
     fun parseExamTableDataFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
-        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+        val falseDoc = jsoupService.getTuitionDoc()
 
         // WHEN
         falseDoc.parseExamTableDataFlow().first()
@@ -43,7 +46,7 @@ class DocumentExtensionsKtTest {
         val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
         requireNotNull(resources)
         // GIVEN
-        val trueDoc = DummyDocument.getStudentTuition_aspx_html()
+        val trueDoc = jsoupService.getTuitionDoc()
 
         // WHEN
         val count = trueDoc.parseTuitionDataFlow(resources).count()
@@ -57,7 +60,7 @@ class DocumentExtensionsKtTest {
         val resources = ApplicationProvider.getApplicationContext<MyTluApplication>().resources
         requireNotNull(resources)
         // GIVEN
-        val falseDoc = DummyDocument.getStudentViewExamList_aspx_html()
+        val falseDoc = jsoupService.getExamTimetableDoc()
 
         // WHEN
         falseDoc.parseTuitionDataFlow(resources).first()
@@ -66,7 +69,7 @@ class DocumentExtensionsKtTest {
     @Test
     fun parseScheduleDataFlow_trueDoc() = runBlockingTest {
         // GIVEN
-        val trueDoc = DummyDocument.getStudentTimeTable_aspx_html()
+        val trueDoc = jsoupService.getTimetableDoc()
 
         // WHEN
         val count = trueDoc.parseScheduleDataFlow().count()
@@ -79,7 +82,7 @@ class DocumentExtensionsKtTest {
     @Test(expected = IllegalArgumentException::class)
     fun parseScheduleDataFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
-        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+        val falseDoc = jsoupService.getTuitionDoc()
 
         // WHEN
         falseDoc.parseScheduleDataFlow().first()
@@ -88,7 +91,7 @@ class DocumentExtensionsKtTest {
     @Test
     fun parseSubjectWithMarksFlow_trueDoc() = runBlockingTest {
         // GIVEN
-        val trueDoc = DummyDocument.getStudentMark_aspx_html()
+        val trueDoc = jsoupService.getMarkDoc()
 
         // WHEN
         val count = trueDoc.parseSubjectWithMarksFlow().count()
@@ -101,7 +104,7 @@ class DocumentExtensionsKtTest {
     @Test(expected = IllegalArgumentException::class)
     fun parseSubjectWithMarksFlow_falseDoc_throwException() = runBlockingTest {
         // GIVEN
-        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+        val falseDoc = jsoupService.getTuitionDoc()
 
         // WHEN
         falseDoc.parseSubjectWithMarksFlow().first()
@@ -110,7 +113,7 @@ class DocumentExtensionsKtTest {
     @Test
     fun parseSummarySemesterFlow_trueDoc() = runBlockingTest {
         // given
-        val trueDoc = DummyDocument.getStudentMark_aspx_html()
+        val trueDoc = jsoupService.getMarkDoc()
 
         // when
         val count = trueDoc.parseSummarySemesterFlow().count()
@@ -122,7 +125,7 @@ class DocumentExtensionsKtTest {
     @Test(expected = IllegalArgumentException::class)
     fun parseSummarySemesterFlow_falseDoc_throwException() = runBlockingTest {
         // given
-        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+        val falseDoc = jsoupService.getTuitionDoc()
 
         // when
         falseDoc.parseSummarySemesterFlow().first()
@@ -131,7 +134,7 @@ class DocumentExtensionsKtTest {
     @Test
     fun parsePractiseMarkFlow_trueDoc() = runBlockingTest {
         // given
-        val trueDoc = DummyDocument.getPractiseMarkAndStudyWarning_aspx_html()
+        val trueDoc = jsoupService.getPractiseDoc()
 
         // when
         val count = trueDoc.parsePractiseMarkFlow().count()
@@ -142,9 +145,34 @@ class DocumentExtensionsKtTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun parsePractiseMarkFlow_falseDoc_throwException() = runBlockingTest {
-        val falseDoc = DummyDocument.getStudentTuition_aspx_html()
+        val falseDoc = jsoupService.getTuitionDoc()
 
         // when
         falseDoc.parsePractiseMarkFlow().first()
+    }
+
+    @Test
+    fun `parseSemesterFlow trueDoc`() = runBlockingTest {
+        // given
+        val trueDocs = listOf(jsoupService.getExamTimetableDoc(), jsoupService.getTimetableDoc())
+
+        for (doc: Document in trueDocs) {
+            // when
+            val count = doc.parseSemesterFlow().count {
+                println(it)
+                true
+            }
+            // then
+            assertThat(count, greaterThanOrEqualTo(27))
+        }
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `parseSemesterFlow falseDoc notCrash`() = runBlockingTest {
+        // given
+        val falseDoc = jsoupService.getMarkDoc()
+
+        // when
+        falseDoc.parseSemesterFlow().first()
     }
 }
